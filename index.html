@@ -54,6 +54,12 @@ main{padding:36px 0 55px}.hero{padding:clamp(28px,5vw,52px);color:white;border-r
 .audio-example .audio-credit{display:block;color:#6a7b70;line-height:1.5}
 .audio-example a{color:#176044;text-decoration:underline}
 
+
+.continue-controls{display:grid;grid-template-columns:1.2fr 1fr 1.3fr;gap:12px;align-items:end}
+.continue-controls .field{min-width:0}
+.continue-controls select{max-width:100%}
+@media(max-width:700px){.continue-controls{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -136,9 +142,13 @@ const tajwidBank = {
 function q(question,arabic,options,answer,explanation){return {question,arabic,options,answer,explanation};}
 const categories = Object.keys(tajwidBank);
 const juzOptions = Array.from({length:30},(_,i)=>i+1);
+const surahNames = ["Al-Fatihah", "Al-Baqarah", "Ali 'Imran", "An-Nisa", "Al-Ma'idah", "Al-An'am", "Al-A'raf", "Al-Anfal", "At-Taubah", "Yunus", "Hud", "Yusuf", "Ar-Ra'd", "Ibrahim", "Al-Hijr", "An-Nahl", "Al-Isra", "Al-Kahf", "Maryam", "Taha", "Al-Anbiya", "Al-Hajj", "Al-Mu'minun", "An-Nur", "Al-Furqan", "Asy-Syu'ara", "An-Naml", "Al-Qasas", "Al-'Ankabut", "Ar-Rum", "Luqman", "As-Sajdah", "Al-Ahzab", "Saba", "Fatir", "Yasin", "As-Saffat", "Sad", "Az-Zumar", "Ghafir", "Fussilat", "Asy-Syura", "Az-Zukhruf", "Ad-Dukhan", "Al-Jasiyah", "Al-Ahqaf", "Muhammad", "Al-Fath", "Al-Hujurat", "Qaf", "Az-Zariyat", "At-Tur", "An-Najm", "Al-Qamar", "Ar-Rahman", "Al-Waqi'ah", "Al-Hadid", "Al-Mujadilah", "Al-Hasyr", "Al-Mumtahanah", "As-Saff", "Al-Jumu'ah", "Al-Munafiqun", "At-Tagabun", "At-Talaq", "At-Tahrim", "Al-Mulk", "Al-Qalam", "Al-Haqqah", "Al-Ma'arij", "Nuh", "Al-Jinn", "Al-Muzzammil", "Al-Muddassir", "Al-Qiyamah", "Al-Insan", "Al-Mursalat", "An-Naba", "An-Nazi'at", "'Abasa", "At-Takwir", "Al-Infitar", "Al-Mutaffifin", "Al-Insyiqaq", "Al-Buruj", "At-Tariq", "Al-A'la", "Al-Ghasyiyah", "Al-Fajr", "Al-Balad", "Asy-Syams", "Al-Lail", "Ad-Duha", "Asy-Syarh", "At-Tin", "Al-'Alaq", "Al-Qadr", "Al-Bayyinah", "Az-Zalzalah", "Al-'Adiyat", "Al-Qari'ah", "At-Takasur", "Al-'Asr", "Al-Humazah", "Al-Fil", "Quraisy", "Al-Ma'un", "Al-Kausar", "Al-Kafirun", "An-Nasr", "Al-Lahab", "Al-Ikhlas", "Al-Falaq", "An-Nas"];
+
 const juzCache = new Map();
 let currentGame=null, category="Nun sukun & tanwin", questionIndex=0, score=0, answered=false, finished=false, activeQuestions=[];
 let juz=1, juzVerses=[], puzzleWords=[], puzzleChecked=false, puzzleCorrect=false;
+let continueMode='juz', selectedSurah=1, continueVerses=[];
+
 
 const tajwidMaterials = [
  {id:"nun",tag:"NUN SUKUN & TANWIN",title:"Hukum Nun Sukun dan Tanwin",intro:"Nun sukun (نْ) atau tanwin (ــًــٍــٌ) memiliki empat hukum ketika bertemu huruf hijaiyah tertentu.",items:[
@@ -365,32 +375,63 @@ function checkPuzzle(key){
  const check=document.getElementById("checkPuzzle");check.disabled=true;
  if(puzzleCorrect){const done=document.createElement("button");done.className="primary";done.textContent="Selesaikan misi";done.onclick=()=>{finished=true;renderGame();};f.appendChild(done);}
 }
+function continueSourceControlsHTML(){
+ const modeOptions=`<option value="juz" ${continueMode==="juz"?"selected":""}>Acak berdasarkan Juz (mode sebelumnya)</option><option value="surah" ${continueMode==="surah"?"selected":""}>Pilih Surah</option>`;
+ const juzField=`<div class="field" id="continueJuzField"><label for="continueJuzSelect">PILIH JUZ (1–30)</label><select id="continueJuzSelect">${juzOptions.map(n=>`<option value="${n}" ${n===juz?"selected":""}>Juz ${n}</option>`).join("")}</select></div>`;
+ const surahField=`<div class="field" id="continueSurahField" ${continueMode==="surah"?"":"style=\"display:none\""}><label for="continueSurahSelect">PILIH SURAH (1–114)</label><select id="continueSurahSelect">${surahNames.map((name,i)=>`<option value="${i+1}" ${i+1===selectedSurah?"selected":""}>${String(i+1).padStart(3,"0")} · ${name}</option>`).join("")}</select></div>`;
+ return `<div class="toolbar continue-controls"><div class="field"><label for="continueModeSelect">SUMBER AYAT</label><select id="continueModeSelect">${modeOptions}</select></div>${juzField}${surahField}</div>`;
+}
 async function renderContinue(root){
- root.innerHTML=`<div class="game-top"><span class="pill">TAHFIDZ · CONTINUE THE AYAH</span><span class="small-label">+10 XP / SOAL</span></div><div class="toolbar">${juzSelectHTML()}</div><div class="status" id="loadStatus">Memuat ayat Juz ${juz}…</div><div id="continueArea"></div>`;
- document.getElementById("juzSelect").addEventListener("change",e=>{juz=Number(e.target.value);loadContinue();});
+ root.innerHTML=`<div class="game-top"><span class="pill">TAHFIDZ · CONTINUE THE AYAH</span><span class="small-label">+10 XP / SOAL</span></div>${continueSourceControlsHTML()}<div class="status" id="loadStatus">Memuat ayat…</div><div id="continueArea"></div>`;
+ document.getElementById("continueModeSelect").addEventListener("change",e=>{
+  continueMode=e.target.value;
+  document.getElementById("continueJuzField").style.display=continueMode==="juz"?"":"none";
+  document.getElementById("continueSurahField").style.display=continueMode==="surah"?"":"none";
+  loadContinue();
+ });
+ document.getElementById("continueJuzSelect").addEventListener("change",e=>{juz=Number(e.target.value);loadContinue();});
+ document.getElementById("continueSurahSelect").addEventListener("change",e=>{selectedSurah=Number(e.target.value);loadContinue();});
  await loadContinue();
+}
+async function loadChapter(chapter){
+ const url=`https://api.quran.com/api/v4/verses/by_chapter/${chapter}?language=id&words=false&per_page=300&fields=text_uthmani`;
+ const response=await fetch(url);
+ if(!response.ok)throw new Error("Data surah tidak dapat diakses dari sumber ayat.");
+ const data=await response.json();
+ const verses=(data.verses||[]).map(v=>({key:v.verse_key,text:v.text_uthmani||v.text_imlaei||""})).filter(v=>v.key&&v.text);
+ if(verses.length<2)throw new Error("Ayat surah tidak cukup untuk membuat soal kelanjutan.");
+ return verses;
 }
 async function loadContinue(){
  const status=document.getElementById("loadStatus"),area=document.getElementById("continueArea");if(!area)return;
- status.textContent=`Mengambil ayat Juz ${juz}…`;area.innerHTML="";
+ const sourceLabel=continueMode==="juz"?`Juz ${juz}`:`Surah ${surahNames[selectedSurah-1]}`;
+ status.textContent=`Mengambil ayat ${sourceLabel}…`;area.innerHTML="";
  try{
-  juzVerses=await loadJuz(juz);
-  const max=Math.max(0,juzVerses.length-1);questionIndex=Math.floor(Math.random()*Math.max(1,max));
+  continueVerses=continueMode==="juz"?await loadJuz(juz):await loadChapter(selectedSurah);
+  const max=Math.max(0,continueVerses.length-1);
+  questionIndex=Math.floor(Math.random()*Math.max(1,max));
+  status.textContent=`Sumber ayat: ${sourceLabel} · soal dipilih secara acak`;
   renderContinueQuestion();
- }catch(err){status.textContent="Gagal memuat ayat. Periksa koneksi internet, lalu coba lagi.";area.innerHTML=`<div class="hint">${escapeHTML(err.message)}<br>Fitur ini membutuhkan koneksi internet untuk mengambil teks ayat.</div><button class="primary" onclick="loadContinue()">Coba lagi</button>`;}
+ }catch(err){
+  status.textContent="Gagal memuat ayat. Periksa koneksi internet, lalu coba lagi.";
+  area.innerHTML=`<div class="hint">${escapeHTML(err.message)}<br>Fitur ini memerlukan koneksi internet untuk mengambil teks ayat.</div><button class="primary" onclick="loadContinue()">Coba lagi</button>`;
+ }
 }
 function renderContinueQuestion(){
  const area=document.getElementById("continueArea");if(!area)return;
- const current=juzVerses[questionIndex],next=juzVerses[questionIndex+1];if(!current||!next){area.innerHTML="<p>Pasangan ayat tidak tersedia pada juz ini.</p>";return;}
- const choices=[next,...juzVerses.filter((v,i)=>i!==questionIndex+1&&i!==questionIndex).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
- area.innerHTML=`<div class="progress"><div style="width:100%"></div></div><h2>Lanjutkan ayat berikut!</h2><p class="instruction">Pilih ayat yang tepat sebagai kelanjutan dari ayat di bawah ini.</p><div class="arabic">${current.text}</div><div class="small-label">REFERENSI AYAT: ${current.key}</div><div class="answer-title" style="margin-top:20px">Manakah kelanjutan ayat yang benar?</div><div class="options">${choices.map((v,i)=>`<button class="option" data-i="${i}"><span class="letter">${String.fromCharCode(65+i)}</span><span dir="rtl" style="font-family:serif;font-size:22px;line-height:1.8">${v.text}</span></button>`).join("")}</div><div id="continueFeedback"></div>`;
+ const current=continueVerses[questionIndex],next=continueVerses[questionIndex+1];
+ if(!current||!next){area.innerHTML="<p>Pasangan ayat tidak tersedia pada sumber yang dipilih.</p><button class=\"primary\" onclick=\"loadContinue()\">Ambil soal acak lagi</button>";return;}
+ const choices=[next,...continueVerses.filter((v,i)=>i!==questionIndex+1&&i!==questionIndex).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
+ const sourceLabel=continueMode==="juz"?`Juz ${juz}`:`Surah ${surahNames[selectedSurah-1]}`;
+ area.innerHTML=`<div class="progress"><div style="width:100%"></div></div><div class="small-label">MODE: ${sourceLabel.toUpperCase()} · SOAL ACAK</div><h2>Lanjutkan ayat berikut!</h2><p class="instruction">Pilih ayat yang tepat sebagai kelanjutan dari ayat di bawah ini.</p><div class="arabic">${current.text}</div><div class="small-label">REFERENSI AYAT: ${current.key}</div><div class="answer-title" style="margin-top:20px">Manakah kelanjutan ayat yang benar?</div><div class="options">${choices.map((v,i)=>`<button class="option" data-i="${i}"><span class="letter">${String.fromCharCode(65+i)}</span><span dir="rtl" style="font-family:serif;font-size:22px;line-height:1.8">${v.text}</span></button>`).join("")}</div><div id="continueFeedback"></div><button class="secondary" id="anotherRandom" style="margin-top:12px">Pilih ayat acak lainnya</button>`;
  area.querySelectorAll(".option").forEach((b,i)=>b.addEventListener("click",()=>chooseContinue(choices[i],next)));
+ document.getElementById("anotherRandom").addEventListener("click",loadContinue);
 }
 function chooseContinue(chosen,correct){
  const right=chosen.key===correct.key;if(right){score+=10;updateScore();}
  document.querySelectorAll("#continueArea .option").forEach(b=>{b.disabled=true;});
- const f=document.getElementById("continueFeedback");f.className=`feedback ${right?"good":"bad"}`;f.innerHTML=`<strong>${right?"Benar! +10 XP":"Belum tepat."}</strong><p>Kelanjutan yang benar: ${correct.key}</p><div class="arabic" style="font-size:25px;margin:12px 0">${correct.text}</div><button class="primary" id="nextContinue">Ayat berikutnya</button>`;
- document.getElementById("nextContinue").addEventListener("click",()=>{if(questionIndex+2>=juzVerses.length){finished=true;renderGame();}else{questionIndex++;renderContinueQuestion();}});
+ const f=document.getElementById("continueFeedback");f.className=`feedback ${right?"good":"bad"}`;f.innerHTML=`<strong>${right?"Benar! +10 XP":"Belum tepat."}</strong><p>Kelanjutan yang benar: ${correct.key}</p><div class="arabic" style="font-size:25px;margin:12px 0">${correct.text}</div><button class="primary" id="nextContinue">Soal berikutnya</button>`;
+ document.getElementById("nextContinue").addEventListener("click",()=>{if(questionIndex+2>=continueVerses.length){loadContinue();}else{questionIndex++;renderContinueQuestion();}});
 }
 function renderFinish(root){
  root.innerHTML=`<div class="finish"><div class="trophy">🏆</div><h2>Misi Selesai!</h2><p class="muted">Selamat, <strong>${escapeHTML(document.getElementById("teamName").value||"Kelompok")}</strong>! Tantangan telah diselesaikan.</p><div class="final-score">${score} XP</div><button class="primary" id="playAgain">Main lagi</button><button class="secondary" onclick="backHome()">Game Center</button></div>`;
