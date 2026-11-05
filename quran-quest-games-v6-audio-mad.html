@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#124b38">
+<title>QUR'AN QUEST — Tahsin & Tahfidz</title>
+<style>
+:root{--g:#124b38;--g2:#23785a;--cream:#f5f7f2;--gold:#e8bd63;--ink:#173b2d;--muted:#64756c;--line:#e4eae5}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--g);color:#fff;box-shadow:0 5px 18px #0c352522}.header-inner,main{width:min(1120px,calc(100% - 36px));margin:auto}.header-inner{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-size:23px;font-weight:900;letter-spacing:.04em}.brand span{color:var(--gold)}.tagline{font-size:12px;color:#d7eee2;margin-top:3px}.arena{border:1px solid #ffffff44;border-radius:99px;padding:9px 14px;font-size:13px;font-weight:700}
+main{padding:36px 0 55px}.hero{padding:clamp(28px,5vw,52px);color:white;border-radius:25px;background:linear-gradient(115deg,var(--g),var(--g2));box-shadow:0 14px 35px #124b3820;margin-bottom:36px}.eyebrow{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:.17em;text-transform:uppercase}.hero h1{max-width:700px;font-size:clamp(32px,5vw,52px);line-height:1.08;margin:13px 0}.hero p{max-width:650px;color:#e7f3ed;line-height:1.7}.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.chip{background:#ffffff20;padding:9px 14px;border-radius:99px;font-size:13px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:0 0 18px}.section-head h2{margin:5px 0 0;font-size:clamp(25px,4vw,32px)}.muted{color:var(--muted);font-size:14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.game-card{color:white;border:0;border-radius:22px;padding:25px;text-align:left;min-height:235px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 8px 22px #173b2d18;transition:.18s}.game-card:hover{transform:translateY(-4px);box-shadow:0 15px 28px #173b2d25}.top{display:flex;justify-content:space-between;width:100%;align-items:center}.game-icon{font-size:42px}.category{font-size:11px;font-weight:900;letter-spacing:.1em;background:#ffffff2a;padding:7px 11px;border-radius:99px}.mission{margin-top:22px;font-size:11px;letter-spacing:.15em;opacity:.75;font-weight:800}.game-card h3{margin:7px 0;font-size:25px}.game-card p{margin:0;line-height:1.55;font-size:14px;opacity:.9}.play-label{margin-top:17px;background:white;color:#172c23;border-radius:10px;padding:10px 15px;font-size:13px;font-weight:800}.emerald{background:linear-gradient(135deg,#16815e,#0d5143)}.orange{background:linear-gradient(135deg,#e7a52e,#b95716)}.blue{background:linear-gradient(135deg,#3976d8,#293f86)}.purple{background:linear-gradient(135deg,#8756d7,#4b318e)}
+.hidden{display:none!important}.back{border:0;background:transparent;color:#145c45;font-weight:800;padding:0;margin:0 0 18px}.scorebar,.team-panel,.game-panel{background:#fff;border-radius:18px;box-shadow:0 5px 20px #173b2d0b}.scorebar{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 21px;margin-bottom:15px}.scorebar h2{margin:4px 0 0;font-size:21px}.score{font-size:28px;font-weight:900;color:#b47b14;text-align:right}.small-label{font-size:11px;color:var(--muted);font-weight:900;letter-spacing:.11em}.team-panel{padding:14px 18px;margin-bottom:15px}.team-panel label{display:block;margin-bottom:7px;font-size:11px;color:var(--muted);font-weight:900;letter-spacing:.1em}.team-panel input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;outline:none;color:var(--ink)}.team-panel input:focus,select:focus{border-color:#16815e;outline:none}
+.game-panel{padding:clamp(21px,4vw,36px)}.game-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px}.pill{padding:8px 12px;background:#e5f3eb;color:#176044;border-radius:99px;font-size:11px;font-weight:900}.progress{height:7px;border-radius:99px;background:#edf1ed;overflow:hidden;margin:16px 0 23px}.progress>div{height:100%;background:#16815e;transition:width .2s}.game-panel h2{margin:0;font-size:clamp(22px,4vw,28px)}.instruction{color:var(--muted);line-height:1.6;margin:8px 0}.arabic{direction:rtl;text-align:center;background:#f3f7f2;border-radius:16px;margin:23px 0;padding:26px 14px;color:#164a35;font-family:"Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(31px,6vw,47px);line-height:1.9}.answer-title{font-weight:800;margin-bottom:11px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.option{background:#fff;border:2px solid var(--line);border-radius:11px;padding:13px;text-align:left;font-weight:700;color:var(--ink);transition:.15s}.option:hover:not(:disabled){border-color:#16815e;background:#f7fbf8}.option:disabled{cursor:default;opacity:1}.option.correct{border-color:#2c9b5c;background:#eaf8ef;color:#176137}.option.wrong{border-color:#d95353;background:#fff0f0;color:#9b2929}.letter{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:8px;border-radius:8px;background:#edf2ee;font-size:12px}.feedback{margin-top:19px;border-radius:13px;padding:15px;line-height:1.55}.feedback.good{background:#eaf8ef;color:#176137}.feedback.bad{background:#fff0f0;color:#9b2929}.feedback p{margin:7px 0 0;font-size:14px}.primary,.secondary{border:0;border-radius:10px;padding:12px 18px;font-weight:800;margin-top:14px}.primary{background:#145c45;color:#fff}.primary:hover{background:#0d4432}.secondary{background:#eef2ee;color:#33483c;margin-left:8px}.primary:disabled{opacity:.5;cursor:not-allowed}
+.toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:20px}.field label{display:block;font-size:11px;font-weight:900;color:var(--muted);letter-spacing:.08em;margin-bottom:7px}.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}.hint{background:#f3f7f2;border-radius:11px;padding:12px 14px;color:#486255;font-size:13px;line-height:1.55;margin:12px 0}.status{font-size:12px;color:var(--muted);margin:10px 0}.wordbank{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;direction:rtl}.word{border:2px solid #c8dfd0;border-radius:10px;padding:11px 13px;background:white;color:#164a35;font-family:serif;font-size:23px;font-weight:800}.word:hover{border-color:#16815e}.finish{text-align:center;padding:20px 5px}.trophy{font-size:65px}.finish h2{margin:12px 0;font-size:31px}.final-score{color:#b47b14;font-size:48px;font-weight:900;margin:20px 0}footer{text-align:center;background:var(--g);color:#d7eee2;padding:22px 15px;font-size:13px}
+@media(max-width:650px){.header-inner{min-height:70px}.arena{font-size:11px;padding:8px 10px}.grid,.options,.toolbar{grid-template-columns:1fr}.game-card{min-height:215px}.section-head{align-items:flex-start;flex-direction:column}.scorebar{align-items:flex-start}.score{font-size:24px}main{padding-top:24px}}
+
+.material-promo{margin-top:26px;padding:24px 26px;background:#fff;border:1px solid var(--line);border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 5px 20px #173b2d0b}
+.material-promo h2{margin:5px 0 7px}.material-promo p{margin:0;color:var(--muted);font-size:14px;line-height:1.6;max-width:650px}
+.material-hero{padding:30px;border-radius:22px;background:linear-gradient(115deg,#124b38,#23785a);color:white;margin-bottom:22px}
+.material-hero h1{font-size:clamp(28px,4vw,40px);margin:9px 0}.material-hero p{max-width:720px;color:#e7f3ed;line-height:1.7;margin-bottom:0}
+.material-tools{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-bottom:17px}
+.material-tools input,.material-tools select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink)}
+.material-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.material-card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 4px 16px #173b2d08}
+.material-card h3{margin:0 0 10px;font-size:19px}.material-card p{font-size:14px;line-height:1.65;color:#42594d;margin:8px 0}
+.material-card .arabic{font-size:25px;margin:13px 0;padding:13px}
+.material-tag{display:inline-block;background:#e7f3eb;color:#176044;padding:6px 9px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:.07em;margin-bottom:9px}
+.material-card ul{padding-left:20px;margin:8px 0;color:#42594d;font-size:14px;line-height:1.7}
+.material-card strong{color:#173b2d}.no-material{grid-column:1/-1;background:white;border-radius:14px;padding:22px;color:var(--muted)}
+@media(max-width:650px){.material-promo{align-items:flex-start;flex-direction:column}.material-tools,.material-list{grid-template-columns:1fr}.material-hero{padding:24px}}
+
+
+.learning-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.learning-stats span{background:#ffffff20;padding:8px 12px;border-radius:30px;font-size:12px;font-weight:700}
+.material-section-title h2{margin:5px 0;font-size:25px}.material-section-title p{margin:5px 0 16px;color:var(--muted);font-size:14px;line-height:1.6}
+.material-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.material-category{border:1px solid var(--line);border-radius:17px;background:#fff;padding:19px;text-align:left;color:var(--ink);box-shadow:0 4px 16px #173b2d08;transition:.15s}.material-category:hover{border-color:#8eb9a0;transform:translateY(-2px)}.material-category .cat-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.material-category .cat-icon{font-size:27px}.material-category h3{margin:12px 0 6px;font-size:18px}.material-category p{font-size:13px;line-height:1.55;color:var(--muted);margin:0}.material-category small{display:block;color:#176044;font-weight:800;margin-top:13px}
+.level-pill{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:#e8f3eb;color:#176044;border-radius:99px;padding:6px 9px}
+.reference-panel{margin-top:24px;padding:21px;background:#fff;border:1px solid var(--line);border-radius:17px}.reference-panel h3{margin:0 0 7px}.reference-panel p{font-size:13px;color:var(--muted);line-height:1.6}.reference-item{padding:11px 0;border-top:1px solid #edf1ed;font-size:13px;line-height:1.55}.reference-item a{color:#176044;font-weight:800;text-decoration:none}.reference-item a:hover{text-decoration:underline}
+.topic-header{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:15px}.topic-header h2{margin:8px 0}.topic-header p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}.topic-cards{display:grid;grid-template-columns:1fr 1fr;gap:13px}.topic-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;text-align:left;color:var(--ink)}.topic-card:hover{border-color:#8eb9a0}.topic-card h3{margin:9px 0 6px;font-size:17px}.topic-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.topic-card .open-topic{display:inline-block;margin-top:13px;color:#176044;font-size:12px;font-weight:900}
+.lesson-sheet{background:#fff;border:1px solid var(--line);border-radius:19px;padding:clamp(20px,4vw,34px)}.lesson-sheet h1{font-size:clamp(25px,4vw,34px);margin:9px 0}.lesson-sheet h2{font-size:19px;margin:22px 0 8px}.lesson-sheet p,.lesson-sheet li{font-size:14px;line-height:1.8;color:#40564a}.lesson-sheet ul{padding-left:21px}.lesson-arabic{direction:rtl;text-align:center;font-family:"Noto Naskh Arabic","Traditional Arabic",serif;font-size:32px;line-height:1.9;padding:18px;background:#f3f7f2;border-radius:14px;margin:16px 0;color:#164a35}.lesson-note{padding:14px 16px;background:#f5f8f5;border-left:4px solid #23785a;border-radius:9px;font-size:13px;line-height:1.65;color:#40564a;margin:17px 0}.lesson-check{padding:17px;background:#fff9e9;border:1px solid #f0dfb7;border-radius:13px;margin-top:22px}.lesson-check h3{margin:0 0 10px;font-size:16px}.lesson-check button{display:block;width:100%;margin:7px 0;text-align:left;padding:10px 12px;border:1px solid #e8dfc8;background:#fff;border-radius:9px;color:#33483c}.lesson-check button:hover{border-color:#c59b42}.lesson-check .quiz-feedback{font-size:13px;font-weight:700;margin-top:10px}.lesson-nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}.lesson-nav button{border:0;border-radius:10px;padding:11px 14px;font-weight:800;background:#145c45;color:#fff}.no-material{background:white;border-radius:14px;padding:22px;color:var(--muted)}
+@media(max-width:650px){.material-categories,.topic-cards{grid-template-columns:1fr}.learning-stats{gap:6px}.learning-stats span{font-size:11px}}
+
+
+.audio-example{margin:18px 0 22px;padding:17px 18px;border:1px solid #cfe2d5;border-radius:15px;background:#f3f8f4}
+.audio-heading{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.audio-icon{font-size:25px}
+.audio-heading strong{display:block;color:#174b38;font-size:16px}
+.audio-heading small{display:block;color:#61766b;margin-top:3px}
+.audio-example p{font-size:14px;line-height:1.6;margin:8px 0;color:#344d40}
+.audio-example audio{width:100%;height:42px;margin:5px 0}
+.audio-example .audio-focus{background:#fff;border-radius:9px;padding:10px 12px}
+.audio-example .audio-credit{display:block;color:#6a7b70;line-height:1.5}
+.audio-example a{color:#176044;text-decoration:underline}
+
+</style>
+</head>
+<body>
+<header><div class="header-inner"><div><div class="brand">QUR'AN <span>QUEST</span></div><div class="tagline">Tahsin &amp; Tahfidz Learning Adventure</div></div><div class="arena">🏆 Learning Arena</div></div></header>
+<main>
+<section id="home">
+  <div class="hero"><div class="eyebrow">Welcome to the adventure</div><h1>Belajar Al-Qur'an Jadi Lebih Seru!</h1><p>Pilih tantangan Tahsin atau Tahfidz, pelajari materi, dan kumpulkan poin bersama kelompokmu.</p><div class="chips"><span class="chip">📖 Tahsin</span><span class="chip">✨ Tahfidz</span><span class="chip">🏆 Team Challenge</span></div></div>
+  <div class="section-head"><div><div class="eyebrow" style="color:#176044">Game Center</div><h2>Pilih Misi Permainan</h2></div><div class="muted">4 permainan tersedia</div></div>
+  <div class="grid">
+    <button class="game-card emerald" onclick="startGame('detective')"><div class="top"><span class="game-icon">🔎</span><span class="category">TAHSIN</span></div><div class="mission">MISSION 01</div><h3>Tajwid Detective</h3><p>Pilih cabang hukum tajwid, lalu temukan hukum bacaan pada contoh ayat.</p><span class="play-label">Mulai Bermain →</span></button>
+    <button class="game-card orange" onclick="startGame('battle')"><div class="top"><span class="game-icon">⚔️</span><span class="category">TAHSIN</span></div><div class="mission">MISSION 02</div><h3>Tajwid Battle</h3><p>Uji ketangkasan pengetahuan tajwid dan hukum mad antarkelompok.</p><span class="play-label">Mulai Bermain →</span></button>
+    <button class="game-card blue" onclick="startGame('puzzle')"><div class="top"><span class="game-icon">🧩</span><span class="category">TAHFIDZ</span></div><div class="mission">MISSION 03</div><h3>Ayat Puzzle</h3><p>Pilih juz, lalu susun kata-kata ayat Al-Qur'an menjadi urutan benar.</p><span class="play-label">Mulai Bermain →</span></button>
+    <button class="game-card purple" onclick="startGame('continue')"><div class="top"><span class="game-icon">📖</span><span class="category">TAHFIDZ</span></div><div class="mission">MISSION 04</div><h3>Continue the Ayah</h3><p>Pilih juz dan lanjutkan ayat berikutnya untuk menguji hafalan.</p><span class="play-label">Mulai Bermain →</span></button>
+  </div>
+  <div class="material-promo">
+    <div><div class="eyebrow" style="color:#176044">Learning Corner</div><h2>Materi Belajar Tajwid</h2>
+    <p>Pelajari konsep, huruf, cara membaca, dan contoh dasar hukum tajwid sebelum mengerjakan tantangan permainan.</p></div>
+    <button class="primary" onclick="openMaterials()">📚 Buka Materi Tajwid →</button>
+  </div>
+</section>
+<section id="materials" class="hidden">
+  <button class="back" onclick="backHome()">← Kembali ke Game Center</button>
+  <div class="material-hero"><div class="eyebrow">Learning Corner · Tajwid Academy</div><h1>Akademi Ilmu Tajwid</h1><p>Belajar secara bertahap: mulai dari dasar pelafalan huruf, memahami hukum bacaan, lalu menerapkannya dalam ayat Al-Qur’an.</p><div class="learning-stats"><span>📚 10 kelompok materi</span><span>🧩 30+ topik belajar</span><span>🎯 Belajar bertahap</span></div></div>
+  <div id="materialCatalog">
+    <div class="material-section-title"><div><div class="eyebrow" style="color:#176044">Peta Pembelajaran</div><h2>Pilih bidang tajwid yang ingin dipelajari</h2><p>Setiap bidang memiliki beberapa submateri. Pilih salah satu untuk melihat daftar pelajaran.</p></div></div>
+    <div class="material-tools"><input id="materialSearch" type="search" placeholder="Cari topik: makhraj, ikhfa, mad, waqaf..." aria-label="Cari materi tajwid"><select id="materialLevel" aria-label="Filter tingkat"><option value="all">Semua tingkat</option><option value="Dasar">Dasar</option><option value="Menengah">Menengah</option><option value="Lanjutan">Lanjutan</option></select></div>
+    <div id="materialCategories" class="material-categories"></div>
+    <div class="reference-panel"><h3>Rujukan utama materi</h3><p>Materi diringkas dan disusun sebagai bahan belajar, bukan salinan halaman buku. Periksa daftar rujukan di bagian akhir untuk identitas bibliografisnya.</p><div id="referenceList"></div></div>
+  </div>
+  <div id="materialTopics" class="hidden"><button class="back" onclick="showMaterialCatalog()">← Semua bidang tajwid</button><div id="topicHeader" class="topic-header"></div><div id="topicCards" class="topic-cards"></div></div>
+  <div id="materialLesson" class="hidden"><button class="back" onclick="backToTopics()">← Kembali ke daftar submateri</button><div id="lessonContent"></div></div>
+  <div class="hint">Catatan penting: pembelajaran tajwid tidak cukup dengan membaca teori. Makhraj, sifat huruf, kadar dengung, dan panjang harakat harus dilatih melalui contoh audio, talaqqi, serta koreksi langsung dari guru yang kompeten.</div>
+</section>
+<section id="play" class="hidden">
+  <button class="back" onclick="backHome()">← Kembali ke Game Center</button>
+  <div class="scorebar"><div><div class="small-label">CURRENT MISSION</div><h2 id="gameTitle"></h2></div><div><div class="small-label">TEAM SCORE</div><div class="score"><span id="score">0</span> XP</div></div></div>
+  <div class="team-panel"><label for="teamName">NAMA KELOMPOK</label><input id="teamName" value="Kelompok 1" placeholder="Masukkan nama kelompok"></div>
+  <div id="gameContent" class="game-panel"></div>
+</section>
+</main>
+<footer>QUR'AN QUEST · Learn, Play, Memorize, and Grow.</footer>
+<script>
+/* Bank soal tajwid awal. Tinjau bersama guru/tashih sebelum dipakai sebagai materi penilaian. */
+const tajwidBank = {
+  "Nun sukun & tanwin":[
+    q("Nun sukun bertemu ba (ب) menghasilkan hukum apa?","مِنْ بَعْدِ",["Izhar Halqi","Iqlab","Ikhfa Haqiqi","Idgham Bighunnah"],"Iqlab","Nun sukun bertemu ba dibaca iqlab."),
+    q("Nun sukun bertemu ya (ي) menghasilkan hukum apa?","مَنْ يَعْمَلْ",["Izhar Halqi","Iqlab","Idgham Bighunnah","Idgham Bilaghunnah"],"Idgham Bighunnah","Nun sukun bertemu ya termasuk idgham bighunnah."),
+    q("Nun sukun bertemu ra (ر) menghasilkan hukum apa?","مِنْ رَبِّهِمْ",["Ikhfa Haqiqi","Iqlab","Idgham Bighunnah","Idgham Bilaghunnah"],"Idgham Bilaghunnah","Nun sukun bertemu ra termasuk idgham bilaghunnah."),
+    q("Nun sukun bertemu 'ain (ع) menghasilkan hukum apa?","أَنْعَمْتَ",["Izhar Halqi","Ikhfa Haqiqi","Iqlab","Idgham Bighunnah"],"Izhar Halqi","'Ain adalah salah satu huruf izhar halqi.")
+  ],
+  "Mim sukun":[
+    q("Mim sukun bertemu ba (ب) disebut hukum apa?","تَرْمِيهِمْ بِحِجَارَةٍ",["Ikhfa Syafawi","Idgham Mimi","Izhar Syafawi","Iqlab"],"Ikhfa Syafawi","Mim sukun bertemu ba dibaca samar dengan dengung."),
+    q("Mim sukun bertemu mim (م) disebut hukum apa?","لَهُمْ مَا",["Ikhfa Syafawi","Idgham Mimi","Izhar Syafawi","Iqlab"],"Idgham Mimi","Mim sukun bertemu mim menjadi idgham mimi."),
+    q("Mim sukun bertemu selain mim dan ba umumnya dibaca apa?","أَمْ لَمْ",["Ikhfa Syafawi","Idgham Mimi","Izhar Syafawi","Iqlab"],"Izhar Syafawi","Mim sukun dibaca jelas ketika bertemu selain mim dan ba.")
+  ],
+  "Hukum Mad":[
+    q("Berapa panjang bacaan mad thabi'i/mad asli?","قَالَ",["1 harakat","2 harakat","4 harakat","6 harakat"],"2 harakat","Mad thabi'i dibaca dua harakat."),
+    q("Mad bertemu hamzah dalam satu kata disebut apa?","جَاءَ",["Mad Jaiz Munfasil","Mad Wajib Muttasil","Mad Badal","Mad Lin"],"Mad Wajib Muttasil","Huruf mad bertemu hamzah dalam satu kata."),
+    q("Mad di akhir kata bertemu hamzah pada awal kata berikutnya disebut apa?","يَا أَيُّهَا",["Mad Wajib Muttasil","Mad Jaiz Munfasil","Mad Lazim","Mad 'Aridh Lissukun"],"Mad Jaiz Munfasil","Huruf mad di akhir kata bertemu hamzah di awal kata berikutnya."),
+    q("Mad thabi'i yang dibaca ketika waqaf karena huruf setelahnya menjadi sukun disebut apa?","الْعَالَمِينَ",["Mad Lin","Mad Badal","Mad 'Aridh Lissukun","Mad Silah"],"Mad 'Aridh Lissukun","Terjadi saat berhenti pada akhir kata yang sebelumnya terdapat huruf mad."),
+    q("Mad yang terjadi karena hamzah mendahului huruf mad dalam satu kata disebut apa?","آمَنُوا",["Mad Badal","Mad Lazim","Mad Lin","Mad Silah"],"Mad Badal","Hamzah diikuti huruf mad dalam satu kata."),
+    q("Mad yang terjadi pada ya atau wau sukun yang didahului fathah dan dibaca saat waqaf disebut apa?","خَوْفٍ",["Mad Thabi'i","Mad Lin","Mad Wajib Muttasil","Mad Badal"],"Mad Lin","Mad lin terjadi pada wau/ya sukun yang didahului fathah, terutama ketika waqaf."),
+    q("Mad yang bertemu sukun asli dalam satu kata disebut apa?","الضَّالِّينَ",["Mad Lazim Kalimi","Mad Jaiz Munfasil","Mad Silah Qasirah","Mad Badal"],"Mad Lazim Kalimi","Mad bertemu sukun asli dalam satu kata."),
+    q("Mad silah qasirah umumnya dibaca berapa harakat?","إِنَّهُ كَانَ",["1","2","4","6"],"2","Mad silah qasirah pada ha dhamir tanpa diikuti hamzah dibaca dua harakat."),
+    q("Mad silah thawilah terjadi ketika ha dhamir diikuti oleh apa?","مَالَهُ أَخْلَدَهُ",["Sukun","Hamzah","Tasydid","Waqaf"],"Hamzah","Ha dhamir diikuti hamzah sehingga menjadi mad silah thawilah.")
+  ],
+  "Qalqalah":[
+    q("Manakah kelompok huruf qalqalah?","قُطْبُ جَدٍ",["ق ط ب ج د","ء ه ع ح غ خ","ي ن م و","ل ر"],"ق ط ب ج د","Huruf qalqalah dirangkum dalam قطب جد.")
+  ],
+  "Lam ta'rif":[
+    q("Lam pada ال bertemu huruf syamsiyah dibaca bagaimana?","الشَّمْسُ",["Jelas","Tidak dibaca/lebur ke huruf berikutnya","Dengung dua harakat","Dipantulkan"],"Tidak dibaca/lebur ke huruf berikutnya","Lam ta'rif pada huruf syamsiyah mengalami idgham.")
+  ],
+  "Ghunnah":[
+    q("Nun bertasydid dibaca dengan dengung berapa harakat?","إِنَّ",["1","2","4","6"],"2","Nun dan mim bertasydid dibaca ghunnah dua harakat.")
+  ],
+  "Ra (ر)":[
+    q("Ra berharakat fathah pada umumnya dibaca bagaimana?","رَبِّ",["Tafkhim/tebal","Tarqiq/tipis","Samar","Memantul"],"Tafkhim/tebal","Ra berharakat fathah dibaca tafkhim.")
+  ]
+};
+function q(question,arabic,options,answer,explanation){return {question,arabic,options,answer,explanation};}
+const categories = Object.keys(tajwidBank);
+const juzOptions = Array.from({length:30},(_,i)=>i+1);
+const juzCache = new Map();
+let currentGame=null, category="Nun sukun & tanwin", questionIndex=0, score=0, answered=false, finished=false, activeQuestions=[];
+let juz=1, juzVerses=[], puzzleWords=[], puzzleChecked=false, puzzleCorrect=false;
+
+const tajwidMaterials = [
+ {id:"nun",tag:"NUN SUKUN & TANWIN",title:"Hukum Nun Sukun dan Tanwin",intro:"Nun sukun (نْ) atau tanwin (ــًــٍــٌ) memiliki empat hukum ketika bertemu huruf hijaiyah tertentu.",items:[
+  ["Izhar Halqi","ء ه ع ح غ خ","Dibaca jelas tanpa dengung tambahan. Huruf nun sukun/tanwin tetap terdengar jelas.","مِنْ هَادٍ","Nun sukun bertemu ه."],
+  ["Idgham Bighunnah","ي ن م و","Nun sukun/tanwin dilebur ke huruf berikutnya disertai dengung.","مَنْ يَعْمَلْ","Bertemu ي; dengung umumnya dua harakat."],
+  ["Idgham Bilaghunnah","ل ر","Nun sukun/tanwin dilebur tanpa dengung.","مِنْ رَبِّهِمْ","Bertemu ر."],
+  ["Iqlab","ب","Bunyi nun sukun/tanwin berubah menjadi bunyi mim samar disertai dengung.","مِنْ بَعْدِ","Bertemu ب."],
+  ["Ikhfa Haqiqi","ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك","Dibaca samar antara izhar dan idgham, disertai dengung.","مِنْ شَرِّ","Bertemu ش."]
+ ]},
+ {id:"mim",tag:"MIM SUKUN",title:"Hukum Mim Sukun",intro:"Mim sukun (مْ) memiliki tiga hukum berdasarkan huruf yang datang sesudahnya.",items:[
+  ["Ikhfa Syafawi","ب","Mim sukun dibaca samar ketika bertemu ba, disertai dengung.","تَرْمِيهِمْ بِحِجَارَةٍ","Mim sukun bertemu ب."],
+  ["Idgham Mimi (Mitslain)","م","Mim sukun dilebur ke mim berikutnya dengan dengung.","لَهُمْ مَا","Mim sukun bertemu م."],
+  ["Izhar Syafawi","Semua huruf selain ب dan م","Mim sukun dibaca jelas, dengan tetap memperhatikan makhraj mim.","أَنْعَمْتَ","Mim sukun bertemu ت."]
+ ]},
+ {id:"mad",tag:"HUKUM MAD",title:"Hukum Mad",intro:"Mad adalah memanjangkan suara pada huruf mad atau huruf lin sesuai sebab dan ketentuan bacaannya. Huruf mad ialah ا setelah fathah, وْ setelah dammah, dan يْ setelah kasrah.",items:[
+  ["Mad Thabi'i / Asli","ا و ي","Dibaca dua harakat ketika tidak diikuti hamzah atau sukun yang menyebabkan hukum mad lain.","قَالَ","Panjang dasar dua harakat."],
+  ["Mad Wajib Muttasil","Huruf mad + ء dalam satu kata","Huruf mad bertemu hamzah dalam satu kata. Panjang bacaan mengikuti pedoman riwayat yang dipelajari.","جَاءَ","Mad dan hamzah berada dalam satu kata."],
+  ["Mad Jaiz Munfasil","Huruf mad di akhir kata + ء awal kata berikutnya","Huruf mad berada di akhir kata dan hamzah berada pada awal kata setelahnya.","يَا أَيُّهَا","Terjadi pada dua kata yang berurutan."],
+  ["Mad 'Aridh Lissukun","Mad sebelum huruf terakhir yang disukunkan karena waqaf","Terjadi ketika berhenti (waqaf) sehingga huruf akhir menjadi sukun; panjang dapat 2, 4, atau 6 harakat menurut pedoman bacaan.","الْعَالَمِينَ","Perhatikan kondisi waqaf."],
+  ["Mad Badal","Hamzah diikuti huruf mad","Hamzah mendahului huruf mad dalam satu kata.","آمَنُوا","Umumnya dua harakat dalam riwayat Hafs."],
+  ["Mad Lin","وْ atau يْ didahului fathah","Ketika waqaf pada kata yang mengandung huruf lin, dapat dipanjangkan sesuai ketentuan.","خَوْفٍ","Contoh dibaca mad lin ketika berhenti."],
+  ["Mad Lazim Kalimi","Huruf mad bertemu sukun asli dalam satu kata","Dipanjangkan enam harakat.","الضَّالِّينَ","Sukun bersifat asli, bukan karena waqaf."],
+  ["Mad Silah Qasirah","هُ / هِ dhamir tidak diikuti hamzah","Ha dhamir di antara dua huruf berharakat dibaca panjang dua harakat menurut ketentuannya.","إِنَّهُ كَانَ","Tidak diikuti hamzah."],
+  ["Mad Silah Thawilah","هُ / هِ dhamir diikuti hamzah","Ha dhamir memenuhi syarat silah dan diikuti hamzah; panjang mengikuti pedoman riwayat.","مَالَهُ أَخْلَدَهُ","Diikuti hamzah."]
+ ]},
+ {id:"qalqalah",tag:"QALQALAH",title:"Hukum Qalqalah",intro:"Qalqalah adalah pantulan suara pada lima huruf qalqalah ketika huruf tersebut berstatus sukun.",items:[
+  ["Huruf Qalqalah","ق ط ب ج د","Hurufnya dirangkum dalam ungkapan قُطْبُ جَدٍ. Pantulan terdengar ketika huruf qalqalah sukun.","يَجْعَلُونَ","Perhatikan جْ yang sukun."],
+  ["Qalqalah Sughra","Huruf qalqalah sukun di tengah bacaan","Pantulan relatif ringan karena huruf sukun berada di tengah bacaan.","يَقْطَعُونَ","Contoh terdapat قْ."],
+  ["Qalqalah Kubra","Berhenti pada huruf qalqalah di akhir kata","Pantulan lebih kuat karena waqaf pada huruf qalqalah.","أَحَدْ","Contoh ketika waqaf pada دْ."]
+ ]},
+ {id:"lam",tag:"LAM TA'RIF",title:"Alif Lam Qamariyah dan Syamsiyah",intro:"Lam ta'rif adalah ال pada awal kata. Cara membaca lam ditentukan oleh huruf yang mengikutinya.",items:[
+  ["Alif Lam Qamariyah","ا ب ج ح خ ع غ ف ق ك م و ه ي","Lam dibaca jelas (izhar). Huruf qamariyah sering dirangkum dalam kelompok huruf qamariyah.","الْقَمَرُ","Lam dibaca jelas."],
+  ["Alif Lam Syamsiyah","ت ث د ذ ر ز س ش ص ض ط ظ ل ن","Lam tidak dibaca jelas karena masuk (idgham) ke huruf syamsiyah berikutnya; huruf berikutnya bertasydid.","الشَّمْسُ","Lam melebur ke ش."]
+ ]},
+ {id:"ghunnah",tag:"GHUNNAH",title:"Ghunnah",intro:"Ghunnah adalah suara dengung yang keluar melalui rongga hidung (khaysyum). Dalam pembelajaran dasar, ghunnah paling mudah dikenali pada nun dan mim bertasydid.",items:[
+  ["Nun bertasydid","نّ","Dibaca dengan dengung sekitar dua harakat.","إِنَّ","Tahan dengung secara proporsional."],
+  ["Mim bertasydid","مّ","Dibaca dengan dengung sekitar dua harakat.","ثُمَّ","Pastikan suara dengung tidak berubah menjadi vokal tambahan."]
+ ]},
+ {id:"ra",tag:"HUKUM RA",title:"Tafkhim dan Tarqiq pada Ra",intro:"Huruf ra (ر) dapat dibaca tebal (tafkhim) atau tipis (tarqiq), bergantung pada harakat dan kondisi huruf di sekitarnya.",items:[
+  ["Ra Tafkhim","رَ / رُ","Ra umumnya dibaca tebal ketika berharakat fathah atau dammah.","رَبِّ","Contoh ra berharakat fathah."],
+  ["Ra Tarqiq","رِ","Ra berharakat kasrah pada umumnya dibaca tipis.","رِزْقًا","Contoh ra berharakat kasrah."],
+  ["Kondisi khusus","Ra sukun dan konteks sekitarnya","Ra sukun memiliki sejumlah ketentuan khusus terkait harakat sebelumnya dan huruf setelahnya. Perlu dipelajari bersama guru.","فِرْعَوْنَ","Jangan menyimpulkan hukum ra hanya dari satu huruf tanpa melihat konteks."]
+ ]}
+];
+const tajwidCourse = [
+ {id:'dasar',icon:'🧭',title:'Pengantar Ilmu Tajwid',level:'Dasar',desc:'Memahami tujuan, ruang lingkup, istilah, dan adab membaca Al-Qur’an.',topics:[
+  ['Apa Itu Ilmu Tajwid?','Pengertian, tujuan, dan urgensi membaca Al-Qur’an secara tartil.','Ilmu tajwid membahas kaidah untuk melafalkan huruf-huruf Al-Qur’an dengan memberikan hak dan mustahaknya. Tujuan praktisnya ialah menjaga ketepatan bacaan dari kesalahan pelafalan.','Pelajari tajwid sebagai ilmu teori sekaligus keterampilan praktik. Pengetahuan istilah belum otomatis membuat bacaan benar; penerapan perlu latihan dan koreksi guru.','Hak huruf berkaitan dengan sifat lazim yang melekat pada huruf, sedangkan mustahak berkaitan dengan sifat atau hukum yang muncul karena kondisi tertentu.'],
+  ['Lahn Jali dan Lahn Khafi','Mengenali kesalahan bacaan yang jelas dan kesalahan yang lebih halus.','Lahn berarti penyimpangan atau kesalahan dalam membaca. Dalam pembahasan tajwid, kesalahan dapat bersifat nyata dan mengubah bentuk bacaan, atau lebih halus terkait ketepatan sifat dan kaidah.','Contoh lahn jali dapat berupa perubahan huruf atau harakat. Lahn khafi dapat berupa tidak tepatnya penerapan dengung atau kadar panjang. Penilaian kasus tertentu perlu melihat konteks dan qira’at.','Biasakan membaca perlahan, memperhatikan makhraj, harakat, dan hukum yang sedang diterapkan.'],
+  ['Adab dan Etika Tilawah','Sikap sebelum, selama, dan sesudah membaca Al-Qur’an.','Adab tilawah mencakup menjaga kebersihan dan kesopanan, membaca dengan tartil, menyimak dengan baik, serta tidak tergesa-gesa.','Guru dapat memodelkan bacaan terlebih dahulu, kemudian siswa menirukan dan menerima koreksi.','Tajwid bukan hanya hafalan definisi; tujuan pembelajaran ialah bacaan yang benar dan beradab.'] ]},
+ {id:'makhraj',icon:'👄',title:'Makharijul Huruf',level:'Dasar',desc:'Tempat keluarnya huruf hijaiyah dan latihan membedakan bunyi yang berdekatan.',topics:[
+  ['Pengertian Makhraj','Konsep tempat keluarnya suara huruf.','Makhraj adalah tempat keluarnya bunyi huruf ketika diucapkan. Ketepatan makhraj membantu membedakan huruf yang bentuk bunyinya berdekatan.','Uji huruf dengan memberi sukun dan didahului hamzah berharakat, lalu amati titik artikulasinya bersama guru.','Jangan menyamakan bunyi س dan ص, atau ه dan ح. Perbedaan makhraj dan sifat memengaruhi identitas huruf.'],
+  ['Al-Jauf: Rongga Mulut','Mengenali huruf mad yang keluar melalui rongga.','Al-jauf merupakan rongga terbuka yang menjadi makhraj huruf mad: alif, waw sukun setelah dammah, dan ya sukun setelah kasrah.','ا setelah fathah, وْ setelah dammah, يْ setelah kasrah.','Pastikan huruf sebelumnya sesuai dengan syarat huruf mad.'],
+  ['Al-Halq: Tenggorokan','Mengenali enam huruf halqiyah.','Huruf tenggorokan dibahas dalam tiga wilayah: pangkal, tengah, dan ujung tenggorokan. Enam hurufnya ialah ء ه ع ح غ خ.','Kelompokkan huruf: ء ه (pangkal), ع ح (tengah), غ خ (ujung) tenggorokan.','Latihan harus memperhatikan artikulasi, bukan menekan tenggorokan secara berlebihan.'],
+  ['Al-Lisan: Lidah','Makhraj huruf yang melibatkan bagian-bagian lidah.','Sebagian besar makharij berada pada lidah. Titik artikulasi melibatkan pangkal, tengah, sisi, tepi, dan ujung lidah dengan posisi berbeda.','Latih perbedaan ق dan ك, ج ش ي, serta ت د ط secara perlahan dengan talaqqi.','Huruf yang berdekatan tidak boleh dipaksa menjadi satu bunyi.'],
+  ['Asy-Syafatain dan Al-Khaisyum','Makhraj dua bibir dan rongga hidung.','Asy-syafatain berkaitan dengan artikulasi dua bibir. Al-khaisyum merupakan tempat keluarnya suara ghunnah.','Latih ف, ب, م, و dan dengung pada نّ serta مّ.','Dengung bukan sekadar menutup hidung; kualitas suara perlu didengar dan dikoreksi.'] ]},
+ {id:'sifat',icon:'🔊',title:'Sifatul Huruf',level:'Menengah',desc:'Sifat bunyi huruf yang membedakan karakter pelafalan.',topics:[
+  ['Pengertian Sifat Huruf','Memahami karakter bunyi yang menyertai huruf.','Sifat huruf menjelaskan karakter bunyi ketika huruf diucapkan, seperti hams, jahr, syiddah, rakhawah, isti‘la, istifal, dan sifat lainnya.','Sifat membantu membedakan huruf yang makhrajnya berdekatan. Pelajari pasangan sifat secara bertahap.','Makhraj menjawab “dari mana huruf keluar”, sedangkan sifat menjawab “bagaimana karakter bunyinya”.'],
+  ['Hams dan Jahr','Membedakan aliran napas pada pelafalan huruf.','Hams berkaitan dengan mengalirnya napas ketika huruf diucapkan, sedangkan jahr berkaitan dengan tertahannya aliran napas menurut definisi ilmu tajwid.','Huruf hams dirangkum dalam فَحَثَّهُ شَخْصٌ سَكَتْ. Huruf selainnya termasuk jahr.','Latih tanpa menambahkan vokal setelah huruf sukun.'],
+  ['Syiddah, Rakhawah, dan Tawassuth','Mengenali tertahan atau mengalirnya suara.','Syiddah menunjukkan tertahannya suara, rakhawah menunjukkan mengalirnya suara, dan tawassuth berada di antara keduanya.','Huruf tawassuth dirangkum dalam لِنْ عُمَرْ. Huruf syiddah dirangkum أَجِدْ قَطٍ بَكَتْ.','Perhatikan karakter suara pada huruf sukun.'],
+  ['Tafkhim dan Tarqiq','Membedakan bunyi tebal dan tipis.','Tafkhim adalah penebalan suara, sedangkan tarqiq adalah penipisan suara. Penerapannya terkait huruf tertentu dan konteks bacaan.','Huruf isti‘la yang umum dirangkum خُصَّ ضَغْطٍ قِظْ.','Tidak semua huruf dibaca tebal. Pelajari pengecualian dan konteksnya bersama guru.'] ]},
+ {id:'nun',icon:'نّ',title:'Nun Sukun dan Tanwin',level:'Dasar',desc:'Empat hukum utama ketika nun sukun atau tanwin bertemu huruf setelahnya.',topics:[
+  ['Izhar Halqi','Nun sukun/tanwin bertemu enam huruf tenggorokan.','Izhar berarti membaca nun sukun atau tanwin secara jelas ketika bertemu ء ه ع ح غ خ.','Contoh: مِنْ هَادٍ. Bunyi nun tetap jelas dan tidak dilebur ke huruf berikutnya.','Enam huruf: ء ه ع ح غ خ.'],
+  ['Idgham Bighunnah','Peleburan dengan dengung.','Terjadi ketika nun sukun atau tanwin bertemu ي ن م و. Bunyi nun/tanwin dilebur ke huruf berikutnya disertai ghunnah.','Contoh: مَنْ يَعْمَلْ. Dalam pembelajaran Hafs yang umum, dengung dibaca sekitar dua harakat.','Perhatikan apakah pertemuan huruf terjadi dalam satu kata atau antarkata; ada pembahasan pengecualian izhar mutlak.'],
+  ['Idgham Bilaghunnah','Peleburan tanpa dengung.','Terjadi ketika nun sukun atau tanwin bertemu ل atau ر. Nun/tanwin dilebur tanpa ghunnah.','Contoh: مِنْ رَبِّهِمْ.','Hurufnya hanya ل dan ر.'],
+  ['Iqlab','Perubahan bunyi nun/tanwin menjadi mim samar.','Terjadi ketika nun sukun atau tanwin bertemu ب. Bunyi berubah menjadi mim yang disamarkan dan disertai ghunnah.','Contoh: مِنْ بَعْدِ. Perhatikan tanda mim kecil pada mushaf tertentu.','Jangan membaca nun secara jelas ketika hukum iqlab berlaku.'],
+  ['Ikhfa Haqiqi','Menyamarkan nun sukun/tanwin pada 15 huruf.','Ikhfa terjadi ketika nun sukun atau tanwin bertemu salah satu dari 15 huruf selain huruf izhar, idgham, dan iqlab.','Huruf: ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك. Contoh: مِنْ شَرِّ.','Kualitas ikhfa menyesuaikan makhraj huruf setelahnya; praktikkan melalui talaqqi.'] ]},
+ {id:'mim',icon:'مْ',title:'Mim Sukun',level:'Dasar',desc:'Tiga hukum mim sukun berdasarkan huruf yang mengikutinya.',topics:[
+  ['Ikhfa Syafawi','Mim sukun bertemu ba.','Mim sukun (مْ) bertemu ب dibaca samar di bibir dengan ghunnah.','Contoh: تَرْمِيهِمْ بِحِجَارَةٍ. Bibir bersiap pada makhraj mim tanpa menekan berlebihan.','Huruf pemicu: ب.'],
+  ['Idgham Mimi / Mitslain','Mim sukun bertemu mim.','Mim sukun melebur ke mim berikutnya sehingga terdengar mim bertasydid dengan ghunnah.','Contoh: لَهُمْ مَا.','Huruf pemicu: م.'],
+  ['Izhar Syafawi','Mim sukun bertemu selain ba dan mim.','Mim sukun dibaca jelas ketika bertemu huruf selain ب dan م.','Contoh: أَنْعَمْتَ. Jaga kejelasan mim, terutama ketika bertemu ف atau و.','Jangan menyamarkan mim pada semua pertemuan huruf.'] ]},
+ {id:'mad',icon:'〰️',title:'Hukum Mad',level:'Menengah',desc:'Mad asli, mad far‘i, mad iwadh, mad silah, mad harfi, serta cabang mad berdasarkan sebab hamzah, sukun, dan waqaf.',topics:[
+  ['Huruf Mad dan Mad Thabi‘i','Mengenali tiga huruf mad dan panjang dasar.','Huruf mad ialah ا setelah fathah, وْ setelah dammah, dan يْ setelah kasrah. Mad thabi‘i tidak diikuti hamzah atau sukun yang menyebabkan mad far‘i.','Contoh: قَالَ، يَقُولُ، قِيلَ. Panjang mad thabi‘i dua harakat.','Harakat adalah satuan ketukan bacaan, bukan hitungan detik yang kaku.'],
+  ['Mad Wajib Muttasil','Huruf mad bertemu hamzah dalam satu kata.','Mad wajib muttasil terjadi ketika huruf mad bertemu hamzah dalam satu kata.','Contoh: جَاءَ. Kadar panjang mengikuti riwayat dan metode talaqqi yang digunakan; pada pembelajaran Hafs yang umum diajarkan 4–5 harakat.','Jangan menyamakan dengan mad jaiz munfasil yang terjadi pada dua kata.'],
+  ['Mad Jaiz Munfasil','Huruf mad di akhir kata bertemu hamzah di awal kata berikutnya.','Mad jaiz munfasil terjadi ketika huruf mad berada di akhir kata dan hamzah berada di awal kata sesudahnya.','Contoh: يَا أَيُّهَا. Kadar panjang mengikuti jalur/riwayat yang dipelajari.','Kedua unsur berada pada dua kata berbeda.'],
+  ['Mad ‘Aridh Lissukun','Mad ketika berhenti pada akhir kata.','Terjadi apabila huruf mad diikuti huruf terakhir yang menjadi sukun karena waqaf.','Contoh waqaf pada الْعَالَمِينَ. Dapat dibaca 2, 4, atau 6 harakat menurut wajah bacaan yang dipelajari.','Hukum ini muncul saat waqaf; ketika washal, ketentuannya berubah.'],
+  ['Mad Badal','Hamzah diikuti huruf mad.','Mad badal terjadi ketika hamzah mendahului huruf mad dalam satu kata.','Contoh: آمَنُوا. Dalam riwayat Hafs yang umum, dibaca dua harakat.','Kenali posisi hamzah yang mendahului huruf mad.'],
+  ['Mad Iwadh','Waqaf pada kata yang berakhir dengan tanwin fathah.','Mad iwadh terjadi ketika pembaca berhenti pada kata yang berakhir dengan fathatain (ــً). Ketika waqaf, bunyi tanwin fathah diganti dengan bunyi alif dan dibaca dua harakat.','Contoh: عَلِيمًا ketika waqaf dibaca عَلِيمَا.','Tidak berlaku pada ta marbuthah (ةً): ketika waqaf dibaca sebagai هْ. Perhatikan pula bentuk kata dan tanda pada mushaf.'],
+  ['Mad Thabi‘i Harfi','Mad asli pada nama huruf pembuka surah tertentu.','Mad thabi‘i harfi terdapat pada huruf-huruf muqaththa‘ah yang nama hurufnya tersusun dari dua huruf dan huruf keduanya merupakan huruf mad. Huruf yang biasa dirangkum ialah ح ي ط ه ر (حَيٌّ طَهُرَ). Dibaca dua harakat.','Contoh pada pembuka surah: طه dibaca Ṭā Hā; الر dibaca Alif Lām Rā (bagian Rā dibaca dua harakat).','Bedakan dengan mad lazim harfi pada nama huruf yang dibaca lebih panjang. Rincian huruf pembuka surah dipelajari sesuai riwayat Hafs.'],
+  ['Mad Lin','Waw atau ya sukun didahului fathah.','Huruf lin ialah وْ atau يْ yang didahului fathah. Ketika waqaf, dapat terjadi mad lin.','Contoh: خَوْفٍ ketika berhenti. Kadar panjang mengikuti kaidah waqaf yang dipelajari.','Mad lin bukan huruf mad biasa; perhatikan harakat sebelum waw/ya.'],
+  ['Mad Lazim','Huruf mad bertemu sukun asli.','Mad lazim terjadi ketika huruf mad bertemu sukun asli, baik dalam kata maupun huruf pembuka surah; cabangnya meliputi kalimi dan harfi serta mukhaffaf/mutsaqqal.','Contoh mad lazim kalimi mutsaqqal: الضَّالِّينَ. Panjangnya enam harakat.','Pelajari klasifikasi kalimi/harfi dan mukhaffaf/mutsaqqal secara terpisah.'],
+  ['Mad Silah Qashirah (Shughra)','Ha dhamir tidak diikuti hamzah.','Mad silah qashirah terjadi pada ha dhamir (هُ / هِ) yang berada di antara dua huruf berharakat dan tidak diikuti hamzah pada kata berikutnya. Dalam bacaan Hafs yang umum diajarkan, dibaca dua harakat.','Contoh: إِنَّهُ كَانَ. Perhatikan bunyi ha dhamir yang disambung dengan suara mad pendek.','Perhatikan syarat ha dhamir; tidak setiap هُ atau هِ otomatis menjadi mad silah. Ada pengecualian yang perlu dipelajari melalui talaqqi.'],
+  ['Mad Silah Thawilah','Ha dhamir diikuti hamzah.','Mad silah thawilah terjadi apabila ha dhamir memenuhi syarat mad silah dan setelahnya terdapat hamzah. Panjang bacaan mengikuti jalur/riwayat yang dipelajari; pada pembelajaran Hafs yang umum, biasanya diajarkan 4–5 harakat.','Contoh: مَالَهُ أَخْلَدَهُ.','Bedakan dengan mad silah qashirah yang tidak diikuti hamzah.'] ]},
+ {id:'lain',icon:'🌙',title:'Hukum Bacaan Lain',level:'Menengah',desc:'Lam ta‘rif, lam pada lafaz Allah, ra, qalqalah, dan ghunnah.',topics:[
+  ['Alif Lam Qamariyah','Lam ta‘rif dibaca jelas.','Alif lam qamariyah terjadi ketika ال bertemu salah satu huruf qamariyah. Lam dibaca jelas.','Contoh: الْقَمَرُ. Huruf qamariyah berjumlah 14.','Perhatikan sukun pada lam dan tidak adanya peleburan.'],
+  ['Alif Lam Syamsiyah','Lam ta‘rif melebur ke huruf syamsiyah.','Alif lam syamsiyah terjadi ketika ال bertemu salah satu huruf syamsiyah; lam tidak dilafalkan jelas dan huruf sesudahnya bertasydid.','Contoh: الشَّمْسُ. Huruf syamsiyah berjumlah 14.','Jangan membaca lam secara terpisah.'],
+  ['Lam pada Lafaz Allah','Tafkhim atau tarqiq pada lafaz jalalah.','Lam pada lafaz Allah dibaca tebal setelah fathah atau dammah, dan dibaca tipis setelah kasrah, sesuai kaidah yang dipelajari.','Tebal: قَالَ اللّٰهُ. Tipis: بِاللّٰهِ.','Lihat harakat sebelum lafaz Allah.'],
+  ['Qalqalah','Pantulan suara pada ق ط ب ج د yang sukun.','Qalqalah adalah pantulan suara pada lima huruf ق ط ب ج د ketika sukun. Pembagian dasar yang umum diajarkan ialah sughra dan kubra.','Contoh sughra: يَقْطَعُونَ. Contoh waqaf: أَحَدْ.','Pantulan bukan menambahkan harakat baru. Jaga agar tidak berubah menjadi bunyi vokal.'],
+  ['Ghunnah Musyaddadah','Dengung pada nun dan mim bertasydid.','Nun (نّ) dan mim (مّ) bertasydid dibaca dengan ghunnah.','Contoh: إِنَّ dan ثُمَّ. Dengung sekitar dua harakat dalam pembelajaran Hafs yang umum.','Ghunnah bersumber dari khaisyum; jangan mengubahnya menjadi vokal tambahan.'],
+  ['Tafkhim dan Tarqiq Ra','Kaidah tebal-tipis huruf ra.','Ra dapat dibaca tebal atau tipis. Hukum dasarnya bergantung pada harakat ra dan kondisi huruf sebelum/sesudahnya, terutama pada ra sukun.','Contoh dasar: رَبِّ (ra fathah, tebal) dan رِزْقًا (ra kasrah, tipis).','Hukum ra memiliki rincian dan pengecualian. Jangan menyimpulkan kasus ra sukun tanpa melihat seluruh konteks.'] ]},
+ {id:'waqaf',icon:'⏸️',title:'Waqaf dan Ibtida’',level:'Lanjutan',desc:'Tanda berhenti, memulai bacaan, dan menjaga hubungan makna ayat.',topics:[
+  ['Pengertian Waqaf dan Ibtida’','Memahami berhenti dan memulai kembali bacaan.','Waqaf adalah menghentikan suara pada akhir kata untuk mengambil napas dengan niat melanjutkan bacaan. Ibtida’ adalah memulai bacaan setelah berhenti atau memulai tilawah.','Pelajari tanda waqaf pada mushaf dan hubungan makna sebelum memutuskan berhenti atau memulai.','Keputusan waqaf dan ibtida’ tidak hanya persoalan napas; makna ayat harus dijaga.'],
+  ['Tanda-tanda Waqaf','Mengenali simbol waqaf yang umum pada mushaf.','Tanda waqaf membantu pembaca memahami tempat berhenti atau meneruskan bacaan. Sistem simbol dapat memiliki variasi penyajian antar mushaf.','Kenali tanda م (waqaf lazim), لا (jangan berhenti), ج (boleh berhenti), dan tanda lain sesuai mushaf yang digunakan.','Ikuti legenda tanda waqaf pada mushaf yang dipakai di kelas.'],
+  ['Waqaf Ikhtibari dan Idtirari','Membedakan berhenti untuk belajar dan karena kondisi darurat.','Waqaf dapat dibahas menurut tujuan dan kondisinya, termasuk berhenti untuk pengujian/pembelajaran dan berhenti karena keadaan terpaksa seperti kehabisan napas.','Saat terpaksa berhenti, perhatikan cara memulai kembali agar susunan dan makna tetap tepat.','Latihan waqaf-ibtida’ idealnya menggunakan bimbingan guru.'] ]},
+ {id:'gharib',icon:'📜',title:'Bacaan Gharib dan Khusus',level:'Lanjutan',desc:'Bacaan khusus dalam riwayat yang memerlukan perhatian dan talaqqi.',topics:[
+  ['Saktah','Berhenti sejenak tanpa mengambil napas pada tempat tertentu.','Saktah adalah berhenti sejenak tanpa mengambil napas, kemudian melanjutkan bacaan. Tempat saktah bergantung pada riwayat dan jalur bacaan.','Dalam riwayat Hafs yang masyhur, terdapat beberapa tempat saktah yang diajarkan dalam mushaf dan talaqqi.','Jangan menerapkan saktah pada setiap tanda waqaf.'],
+  ['Imalah','Kecenderungan bunyi fathah ke arah kasrah dan alif ke arah ya.','Imalah merupakan cara pelafalan khusus yang tidak sama dengan fathah biasa. Pembahasannya terkait riwayat dan jalur qira’at.','Pelajari melalui contoh audio guru qira’at yang kompeten.','Jangan menirukan hanya dari ejaan latin.'],
+  ['Isymam dan Tashil','Dua cara pelafalan khusus dalam bacaan Al-Qur’an.','Isymam dan tashil termasuk bacaan khusus yang memiliki cara artikulasi tertentu dan harus dipelajari melalui contoh talaqqi.','Gunakan mushaf bertanda dan contoh audio yang telah diverifikasi oleh pengajar.','Materi ini tingkat lanjut; utamakan ketepatan guru dan riwayat bacaan.'] ]}
+];
+const tajwidReferences = [
+ ['Zulkarnaini Umar (2020). Panduan Ilmu Tajwid Praktis. UIR Press, Pekanbaru. ISBN 978-979-3793-96-2.','https://repository.uir.ac.id/5429/','Katalog dan akses PDF pada Repository Universitas Islam Riau.'],
+ ['Miftahul Arifin (2019). Syarah Tuhfatul Athfal: Penjelasan Ringkas dan Praktis Pokok-pokok Hukum Tajwid. WM Press.','https://pustaka.iiq.ac.id/katalog/detail.php?id=13844&lang=id','Katalog Perpustakaan IIQ Jakarta.'],
+ ['Sulaiman al-Jamzuri. Tuhfatul Athfal wa al-Ghilman fi Tajwid al-Qur’an.','https://books.google.com/books/about/Terjemah_tuhfatul_athfal.html?id=89rt0AEACAAJ','Data bibliografis terjemahan dan cakupan pokok kaidah.'],
+ ['Saeful Bahri (2012). Panduan dan Tuntunan Ilmu Tajwid dalam Naskah. Penamadani. ISBN 978-979-2646-64-1.','https://perpustakaanlajnah.kemenag.go.id/home/index.php?id=9480&p=show_detail','Katalog Perpustakaan Lajnah Pentashihan Mushaf Al-Qur’an, Kementerian Agama.'],
+ ['Muhammad Ahmad Mu’abbad (2014). Panduan Lengkap Ilmu Tajwid. PQS Publishing. ISBN 978-602-14300-6-4.','https://bintangpusnas.perpusnas.go.id/konten/BK59423/panduan-lengkap-ilmu-tajwid','Katalog e-book Bintangpusnas/Perpusnas.']
+];
+let activeMaterialCategory=null,activeTopicIndex=0;
+function openMaterials(){document.getElementById('home').classList.add('hidden');document.getElementById('play').classList.add('hidden');document.getElementById('materials').classList.remove('hidden');showMaterialCatalog();renderMaterialCategories();window.scrollTo({top:0,behavior:'smooth'});}
+function renderMaterialCategories(){
+ const root=document.getElementById('materialCategories');if(!root)return;
+ const q=(document.getElementById('materialSearch')?.value||'').trim().toLowerCase();const level=document.getElementById('materialLevel')?.value||'all';
+ const found=tajwidCourse.filter(c=>(level==='all'||c.level===level)&&(`${c.title} ${c.desc} ${c.topics.map(t=>t[0]+' '+t[1]).join(' ')}`).toLowerCase().includes(q));
+ root.innerHTML=found.length?found.map(c=>`<button class="material-category" onclick="openMaterialCategory('${c.id}')"><div class="cat-top"><span class="cat-icon">${c.icon}</span><span class="level-pill">${c.level}</span></div><h3>${c.title}</h3><p>${c.desc}</p><small>${c.topics.length} submateri · Buka pembelajaran →</small></button>`).join(''):'<div class="no-material">Materi tidak ditemukan. Ubah kata kunci atau filter tingkat.</div>';
+ document.getElementById('referenceList').innerHTML=tajwidReferences.map(r=>`<div class="reference-item"><strong>${r[0]}</strong><br><span>${r[2]}</span><br><a href="${r[1]}" target="_blank" rel="noopener">Lihat katalog/sumber ↗</a></div>`).join('');
+}
+function showMaterialCatalog(){document.getElementById('materialCatalog').classList.remove('hidden');document.getElementById('materialTopics').classList.add('hidden');document.getElementById('materialLesson').classList.add('hidden');}
+function openMaterialCategory(id){activeMaterialCategory=tajwidCourse.find(c=>c.id===id);if(!activeMaterialCategory)return;document.getElementById('materialCatalog').classList.add('hidden');document.getElementById('materialLesson').classList.add('hidden');document.getElementById('materialTopics').classList.remove('hidden');document.getElementById('topicHeader').innerHTML=`<span class="level-pill">${activeMaterialCategory.level}</span><h2>${activeMaterialCategory.icon} ${activeMaterialCategory.title}</h2><p>${activeMaterialCategory.desc}</p>`;document.getElementById('topicCards').innerHTML=activeMaterialCategory.topics.map((t,i)=>`<button class="topic-card" onclick="openMaterialLesson(${i})"><span class="level-pill">PELAJARAN ${String(i+1).padStart(2,'0')}</span><h3>${t[0]}</h3><p>${t[1]}</p><span class="open-topic">Pelajari materi →</span></button>`).join('');window.scrollTo({top:0,behavior:'smooth'});}
+function backToTopics(){document.getElementById('materialLesson').classList.add('hidden');document.getElementById('materialTopics').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function openMaterialLesson(i){activeTopicIndex=i;const t=activeMaterialCategory.topics[i];const next=activeTopicIndex+1<activeMaterialCategory.topics.length?`<button onclick="openMaterialLesson(${i+1})">Materi berikutnya →</button>`:'';const prev=i>0?`<button onclick="openMaterialLesson(${i-1})">← Materi sebelumnya</button>`:'';document.getElementById('materialTopics').classList.add('hidden');document.getElementById('materialLesson').classList.remove('hidden');document.getElementById('lessonContent').innerHTML=`<article class="lesson-sheet"><span class="level-pill">${activeMaterialCategory.title} · ${activeMaterialCategory.level}</span><h1>${t[0]}</h1><p>${t[1]}</p><h2>1. Penjelasan konsep</h2><p>${t[2]}</p><div class="lesson-arabic">${getLessonArabic(t[0])}</div>${activeMaterialCategory.id==='mad'?renderMadAudio(t[0]):''}<h2>2. Contoh dan penerapan</h2><p>${t[3]}</p><h2>3. Hal yang perlu diperhatikan</h2><div class="lesson-note">${t[4]}</div><h2>4. Cara belajar yang disarankan</h2><ul><li>Dengarkan contoh bacaan dari guru atau qari yang kompeten.</li><li>Amati huruf dan kondisi yang menyebabkan hukum bacaan.</li><li>Tirukan secara perlahan, rekam bila diperlukan, lalu minta koreksi guru.</li><li>Temukan contoh lain dalam mushaf dan jelaskan alasan hukumnya.</li></ul><div class="lesson-check"><h3>Cek pemahaman</h3><p>Apakah materi ini sudah kamu pelajari dan pahami?</p><button onclick="lessonSelfCheck(this,true)">✓ Ya, saya memahami konsepnya</button><button onclick="lessonSelfCheck(this,false)">↻ Saya perlu mengulang dan bertanya</button><div class="quiz-feedback" aria-live="polite"></div></div><div class="lesson-nav">${prev}${next}</div></article>`;window.scrollTo({top:0,behavior:'smooth'});}
+
+function getMadAudioInfo(title){
+ const map={
+  'Huruf Mad dan Mad Thabi‘i':{surah:2,ayah:258,ref:'Al-Baqarah 2:258',focus:'Contoh huruf mad dalam lafaz قَالَ pada ayat ini.'},
+  'Mad Wajib Muttasil':{surah:2,ayah:87,ref:'Al-Baqarah 2:87',focus:'Dengarkan mad pada kata yang mengandung huruf mad bertemu hamzah dalam satu kata.'},
+  'Mad Jaiz Munfasil':{surah:2,ayah:21,ref:'Al-Baqarah 2:21',focus:'Dengarkan rangkaian يَا أَيُّهَا; huruf mad di akhir kata bertemu hamzah pada kata berikutnya.'},
+  'Mad ‘Aridh Lissukun':{surah:1,ayah:2,ref:'Al-Fatihah 1:2',focus:'Dengarkan akhir الْعَالَمِينَ dan ulangi dengan waqaf. Variasi panjang 2, 4, atau 6 harakat dipraktikkan sesuai wajah bacaan yang diajarkan.'},
+  'Mad Badal':{surah:2,ayah:9,ref:'Al-Baqarah 2:9',focus:'Cari lafaz آمَنُوا; hamzah mendahului huruf mad.'},
+  'Mad Iwadh':{surah:4,ayah:11,ref:'An-Nisa 4:11',focus:'Dengarkan عَلِيمًا حَكِيمًا. Untuk contoh mad iwadh, fokuskan pada cara waqaf di akhir kata bertanwin fathah.'},
+  'Mad Thabi‘i Harfi':{surah:20,ayah:1,ref:'Taha 20:1',focus:'Dengarkan huruf muqaththa‘ah طه pada awal surah. Perhatikan pelafalan nama hurufnya.'},
+  'Mad Lin':{surah:2,ayah:38,ref:'Al-Baqarah 2:38',focus:'Dengarkan lafaz خَوْفٌ. Untuk memunculkan mad lin, perhatikan cara berhenti pada kata tersebut saat latihan.'},
+  'Mad Lazim':{surah:1,ayah:7,ref:'Al-Fatihah 1:7',focus:'Dengarkan الضَّالِّينَ; contoh mad lazim kalimi mutsaqqal yang dibaca enam harakat.'},
+  'Mad Silah Qashirah (Shughra)':{surah:17,ayah:44,ref:'Al-Isra 17:44',focus:'Dengarkan إِنَّهُۥ كَانَ; ha dhamir disambung dan tidak diikuti hamzah.'},
+  'Mad Silah Thawilah':{surah:104,ayah:3,ref:'Al-Humazah 104:3',focus:'Dengarkan مَالَهُۥٓ أَخْلَدَهُۥ; ha dhamir diikuti hamzah pada kata berikutnya.'}
+ };
+ const item=map[title];if(!item)return '';
+ const file=String(item.surah).padStart(3,'0')+String(item.ayah).padStart(3,'0')+'.mp3';
+ const url='https://everyayah.com/data/Alafasy_128kbps/'+file;
+ return `<section class="audio-example"><div class="audio-heading"><span class="audio-icon">🎧</span><div><strong>Contoh audio bacaan</strong><small>Mishary Rashid Alafasy · Murattal · Riwayat Hafs ‘an ‘Ashim</small></div></div><p><strong>Referensi ayat:</strong> ${item.ref}</p><audio controls preload="none" src="${url}">Browser Anda tidak mendukung pemutar audio.</audio><p class="audio-focus">${item.focus}</p><small class="audio-credit">Sumber audio: <a href="https://everyayah.com/" target="_blank" rel="noopener">EveryAyah.com</a>. Audio diputar secara streaming; hak rekaman tetap pada pemilik/sumbernya.</small></section>`;
+}
+
+function renderMadAudio(title){return getMadAudioInfo(title);}
+function getLessonArabic(title){const examples={'Izhar Halqi':'مِنْ هَادٍ','Idgham Bighunnah':'مَنْ يَعْمَلْ','Idgham Bilaghunnah':'مِنْ رَبِّهِمْ','Iqlab':'مِنْ بَعْدِ','Ikhfa Haqiqi':'مِنْ شَرِّ','Ikhfa Syafawi':'تَرْمِيهِمْ بِحِجَارَةٍ','Idgham Mimi / Mitslain':'لَهُمْ مَا','Izhar Syafawi':'أَنْعَمْتَ','Mad Wajib Muttasil':'جَاءَ','Mad Jaiz Munfasil':'يَا أَيُّهَا','Mad ‘Aridh Lissukun':'الْعَالَمِينَ','Mad Badal':'آمَنُوا','Mad Iwadh':'عَلِيمًا','Mad Thabi‘i Harfi':'طه · الر','Mad Lin':'خَوْفٍ','Mad Lazim':'الضَّالِّينَ','Mad Silah Qashirah (Shughra)':'إِنَّهُ كَانَ','Mad Silah Thawilah':'مَالَهُ أَخْلَدَهُ','Alif Lam Qamariyah':'الْقَمَرُ','Alif Lam Syamsiyah':'الشَّمْسُ','Qalqalah':'أَحَدْ','Ghunnah Musyaddadah':'إِنَّ','Lam pada Lafaz Allah':'بِاللّٰهِ','Ra Tafkhim dan Tarqiq':'رَبِّ · رِزْقًا'};return examples[title]||'أَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ';}
+function lessonSelfCheck(btn,yes){const box=btn.parentElement.querySelector('.quiz-feedback');box.textContent=yes?'Bagus. Lanjutkan dengan latihan membaca dan minta verifikasi guru.':'Tidak masalah. Baca ulang penjelasan, lalu praktikkan bersama guru.';box.style.color=yes?'#176044':'#8a5a12';}
+
+
+function startGame(id){
+  currentGame=id;questionIndex=0;score=0;answered=false;finished=false;
+  document.getElementById("home").classList.add("hidden");document.getElementById("play").classList.remove("hidden");
+  const titles={detective:"Tajwid Detective",battle:"Tajwid Battle",puzzle:"Ayat Puzzle",continue:"Continue the Ayah"};
+  document.getElementById("gameTitle").textContent=titles[id];updateScore();renderGame();window.scrollTo({top:0,behavior:"smooth"});
+}
+function backHome(){document.getElementById("play").classList.add("hidden");document.getElementById("materials").classList.add("hidden");document.getElementById("home").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function updateScore(){document.getElementById("score").textContent=score;}
+function juzSelectHTML(){return `<div class="field"><label for="juzSelect">PILIH JUZ (1–30)</label><select id="juzSelect">${juzOptions.map(n=>`<option value="${n}" ${n===juz?"selected":""}>Juz ${n}</option>`).join("")}</select></div>`;}
+function categorySelectHTML(){return `<div class="field"><label for="categorySelect">PILIH CABANG HUKUM TAJWID</label><select id="categorySelect">${categories.map(c=>`<option ${c===category?"selected":""}>${c}</option>`).join("")}</select></div>`;}
+function renderGame(){
+ const root=document.getElementById("gameContent");
+ if(finished){renderFinish(root);return;}
+ if(currentGame==="detective"||currentGame==="battle"){renderTajwid(root);return;}
+ if(currentGame==="puzzle"){renderPuzzle(root);return;}
+ renderContinue(root);
+}
+function renderTajwid(root){
+ const bank=tajwidBank[category];activeQuestions=bank;
+ if(questionIndex>=bank.length){finished=true;renderFinish(root);return;}
+ const q=bank[questionIndex],label=currentGame==="battle"?"TAJWID BATTLE":"TAJWID DETECTIVE";
+ root.innerHTML=`<div class="game-top"><span class="pill">${label}</span><span class="small-label">SOAL ${questionIndex+1} / ${bank.length}</span></div>
+ <div class="toolbar">${categorySelectHTML()}</div>
+ <div class="progress"><div style="width:${((questionIndex+1)/bank.length)*100}%"></div></div>
+ <h2>${q.question}</h2><div class="arabic">${q.arabic}</div><div class="answer-title">Pilih jawaban yang benar:</div>
+ <div class="options">${q.options.map((o,i)=>`<button class="option" data-i="${i}"><span class="letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join("")}</div><div id="feedback"></div>
+ <div class="hint">Pilih cabang hukum lain melalui menu di atas. Bank soal ini merupakan materi awal dan perlu ditelaah guru sebelum digunakan untuk penilaian.</div>`;
+ document.getElementById("categorySelect").addEventListener("change",e=>{category=e.target.value;questionIndex=0;answered=false;renderGame();});
+ root.querySelectorAll(".option").forEach(b=>b.addEventListener("click",()=>chooseTajwid(Number(b.dataset.i))));
+}
+function chooseTajwid(i){
+ if(answered)return;answered=true;const q=activeQuestions[questionIndex],chosen=q.options[i],correct=chosen===q.answer;if(correct)score+=10;updateScore();
+ document.querySelectorAll(".option").forEach((b,j)=>{b.disabled=true;if(q.options[j]===q.answer)b.classList.add("correct");else if(j===i)b.classList.add("wrong");});
+ const f=document.getElementById("feedback");f.className=`feedback ${correct?"good":"bad"}`;f.innerHTML=`<strong>${correct?"🎉 Benar! +10 XP":"Belum tepat."}</strong><p>${q.explanation}</p><button class="primary" id="nextBtn">${questionIndex+1===activeQuestions.length?"Selesai kategori":"Soal berikutnya →"}</button>`;
+ document.getElementById("nextBtn").addEventListener("click",()=>{if(questionIndex+1>=activeQuestions.length){finished=true;}else{questionIndex++;answered=false;}renderGame();});
+}
+
+/* Mengambil ayat berdasarkan juz dari Quran.com API. Perlu koneksi internet. */
+async function loadJuz(n){
+ if(juzCache.has(n))return juzCache.get(n);
+ const url=`https://api.quran.com/api/v4/verses/by_juz/${n}?language=id&words=false&per_page=50&fields=text_uthmani`;
+ const response=await fetch(url);
+ if(!response.ok)throw new Error("API ayat tidak dapat diakses.");
+ const data=await response.json();
+ const verses=(data.verses||[]).map(v=>({key:v.verse_key,text:v.text_uthmani||v.text_imlaei||""})).filter(v=>v.key&&v.text);
+ if(!verses.length)throw new Error("Data ayat untuk juz ini tidak ditemukan.");
+ juzCache.set(n,verses);return verses;
+}
+function parseKey(key){const p=key.split(":").map(Number);return {surah:p[0],ayah:p[1]};}
+function setLoading(root,message){root.innerHTML=`<div class="status">${message}</div>`;}
+async function renderPuzzle(root){
+ root.innerHTML=`<div class="game-top"><span class="pill">TAHFIDZ · AYAT PUZZLE</span><span class="small-label">+20 XP</span></div><div class="toolbar">${juzSelectHTML()}</div><div class="status" id="loadStatus">Memuat daftar ayat Juz ${juz}…</div><div id="puzzleArea"></div>`;
+ document.getElementById("juzSelect").addEventListener("change",e=>{juz=Number(e.target.value);puzzleChecked=false;loadPuzzle();});
+ await loadPuzzle();
+}
+async function loadPuzzle(){
+ const status=document.getElementById("loadStatus"),area=document.getElementById("puzzleArea");if(!area)return;
+ status.textContent=`Mengambil ayat Juz ${juz} dari sumber daring…`;area.innerHTML="";
+ try{
+  juzVerses=await loadJuz(juz);
+  const candidates=juzVerses.filter(v=>v.text.trim().split(/\s+/).length>=3&&v.text.trim().split(/\s+/).length<=9);
+  const v=candidates[Math.floor(Math.random()*candidates.length)]||juzVerses[0];
+  puzzleWords=v.text.trim().split(/\s+/);puzzleWords=puzzleWords.map((w,i)=>({w,original:i}));
+  /* Acak kata agar tidak langsung tersusun. */
+  for(let i=puzzleWords.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[puzzleWords[i],puzzleWords[j]]=[puzzleWords[j],puzzleWords[i]];}
+  puzzleChecked=false;puzzleCorrect=false;status.textContent=`Sumber ayat: Juz ${juz} · ${v.key}`;
+  renderPuzzleArea(v.key);
+ }catch(err){status.textContent="Gagal memuat ayat. Periksa koneksi internet, lalu coba lagi.";area.innerHTML=`<div class="hint">${escapeHTML(err.message)}<br>Ayat Al-Qur'an diambil secara daring agar pilihan Juz 1–30 menggunakan teks lengkap. Buka file ini dengan koneksi internet.</div><button class="primary" onclick="loadPuzzle()">Coba lagi</button>`;}
+}
+function renderPuzzleArea(key){
+ const area=document.getElementById("puzzleArea");if(!area)return;
+ area.innerHTML=`<h2>Susun kata-kata ayat berikut!</h2><p class="instruction">Ketuk dua kata secara bergantian untuk menukar posisinya sampai urutan ayat benar.</p><div class="arabic" style="font-size:19px"><div class="small-label" style="margin-bottom:13px">AYAT ${key}</div><div class="wordbank">${puzzleWords.map((item,i)=>`<button class="word" data-word="${i}">${item.w}</button>`).join("")}</div></div><div id="puzzleFeedback"></div><button class="primary" id="checkPuzzle">Periksa susunan</button><button class="secondary" id="newPuzzle">Ayat lain dalam juz ini</button>`;
+ let first=null;area.querySelectorAll(".word").forEach(b=>b.addEventListener("click",()=>{const i=Number(b.dataset.word);if(first===null){first=i;b.style.borderColor="#d39a2c";}else{[puzzleWords[first],puzzleWords[i]]=[puzzleWords[i],puzzleWords[first]];first=null;renderPuzzleArea(key);}}));
+ document.getElementById("checkPuzzle").addEventListener("click",()=>checkPuzzle(key));
+ document.getElementById("newPuzzle").addEventListener("click",loadPuzzle);
+}
+function checkPuzzle(key){
+ puzzleChecked=true;puzzleCorrect=puzzleWords.every((item,i)=>item.original===i);if(puzzleCorrect){score+=20;updateScore();}
+ const f=document.getElementById("puzzleFeedback");f.className=`feedback ${puzzleCorrect?"good":"bad"}`;f.innerHTML=`<strong>${puzzleCorrect?"Tepat! +20 XP":"Urutan belum tepat."}</strong><p>${puzzleCorrect?"Susunan kata sesuai urutan ayat.":"Coba tukar kembali posisi kata-kata."}</p>${puzzleCorrect?`<p>Referensi: ${key}</p>`:""}`;
+ const check=document.getElementById("checkPuzzle");check.disabled=true;
+ if(puzzleCorrect){const done=document.createElement("button");done.className="primary";done.textContent="Selesaikan misi";done.onclick=()=>{finished=true;renderGame();};f.appendChild(done);}
+}
+async function renderContinue(root){
+ root.innerHTML=`<div class="game-top"><span class="pill">TAHFIDZ · CONTINUE THE AYAH</span><span class="small-label">+10 XP / SOAL</span></div><div class="toolbar">${juzSelectHTML()}</div><div class="status" id="loadStatus">Memuat ayat Juz ${juz}…</div><div id="continueArea"></div>`;
+ document.getElementById("juzSelect").addEventListener("change",e=>{juz=Number(e.target.value);loadContinue();});
+ await loadContinue();
+}
+async function loadContinue(){
+ const status=document.getElementById("loadStatus"),area=document.getElementById("continueArea");if(!area)return;
+ status.textContent=`Mengambil ayat Juz ${juz}…`;area.innerHTML="";
+ try{
+  juzVerses=await loadJuz(juz);
+  const max=Math.max(0,juzVerses.length-1);questionIndex=Math.floor(Math.random()*Math.max(1,max));
+  renderContinueQuestion();
+ }catch(err){status.textContent="Gagal memuat ayat. Periksa koneksi internet, lalu coba lagi.";area.innerHTML=`<div class="hint">${escapeHTML(err.message)}<br>Fitur ini membutuhkan koneksi internet untuk mengambil teks ayat.</div><button class="primary" onclick="loadContinue()">Coba lagi</button>`;}
+}
+function renderContinueQuestion(){
+ const area=document.getElementById("continueArea");if(!area)return;
+ const current=juzVerses[questionIndex],next=juzVerses[questionIndex+1];if(!current||!next){area.innerHTML="<p>Pasangan ayat tidak tersedia pada juz ini.</p>";return;}
+ const choices=[next,...juzVerses.filter((v,i)=>i!==questionIndex+1&&i!==questionIndex).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
+ area.innerHTML=`<div class="progress"><div style="width:100%"></div></div><h2>Lanjutkan ayat berikut!</h2><p class="instruction">Pilih ayat yang tepat sebagai kelanjutan dari ayat di bawah ini.</p><div class="arabic">${current.text}</div><div class="small-label">REFERENSI AYAT: ${current.key}</div><div class="answer-title" style="margin-top:20px">Manakah kelanjutan ayat yang benar?</div><div class="options">${choices.map((v,i)=>`<button class="option" data-i="${i}"><span class="letter">${String.fromCharCode(65+i)}</span><span dir="rtl" style="font-family:serif;font-size:22px;line-height:1.8">${v.text}</span></button>`).join("")}</div><div id="continueFeedback"></div>`;
+ area.querySelectorAll(".option").forEach((b,i)=>b.addEventListener("click",()=>chooseContinue(choices[i],next)));
+}
+function chooseContinue(chosen,correct){
+ const right=chosen.key===correct.key;if(right){score+=10;updateScore();}
+ document.querySelectorAll("#continueArea .option").forEach(b=>{b.disabled=true;});
+ const f=document.getElementById("continueFeedback");f.className=`feedback ${right?"good":"bad"}`;f.innerHTML=`<strong>${right?"Benar! +10 XP":"Belum tepat."}</strong><p>Kelanjutan yang benar: ${correct.key}</p><div class="arabic" style="font-size:25px;margin:12px 0">${correct.text}</div><button class="primary" id="nextContinue">Ayat berikutnya</button>`;
+ document.getElementById("nextContinue").addEventListener("click",()=>{if(questionIndex+2>=juzVerses.length){finished=true;renderGame();}else{questionIndex++;renderContinueQuestion();}});
+}
+function renderFinish(root){
+ root.innerHTML=`<div class="finish"><div class="trophy">🏆</div><h2>Misi Selesai!</h2><p class="muted">Selamat, <strong>${escapeHTML(document.getElementById("teamName").value||"Kelompok")}</strong>! Tantangan telah diselesaikan.</p><div class="final-score">${score} XP</div><button class="primary" id="playAgain">Main lagi</button><button class="secondary" onclick="backHome()">Game Center</button></div>`;
+ document.getElementById("playAgain").addEventListener("click",()=>startGame(currentGame));
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+document.addEventListener('DOMContentLoaded',()=>{const search=document.getElementById('materialSearch'),level=document.getElementById('materialLevel');if(search)search.addEventListener('input',renderMaterialCategories);if(level)level.addEventListener('change',renderMaterialCategories);});
+</script>
+</body>
+</html>
