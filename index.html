@@ -5,7 +5,120 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#124b38">
 <title>QUR'AN QUEST — Tahsin & Tahfidz</title>
-<link rel="stylesheet" href="style.css">
+<style>
+:root{--g:#124b38;--g2:#23785a;--cream:#f5f7f2;--gold:#e8bd63;--ink:#173b2d;--muted:#64756c;--line:#e4eae5}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--g);color:#fff;box-shadow:0 5px 18px #0c352522}.header-inner,main{width:min(1120px,calc(100% - 36px));margin:auto}.header-inner{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-size:23px;font-weight:900;letter-spacing:.04em}.brand span{color:var(--gold)}.tagline{font-size:12px;color:#d7eee2;margin-top:3px}.arena{border:1px solid #ffffff44;border-radius:99px;padding:9px 14px;font-size:13px;font-weight:700}
+main{padding:36px 0 55px}.hero{padding:clamp(28px,5vw,52px);color:white;border-radius:25px;background:linear-gradient(115deg,var(--g),var(--g2));box-shadow:0 14px 35px #124b3820;margin-bottom:36px}.eyebrow{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:.17em;text-transform:uppercase}.hero h1{max-width:700px;font-size:clamp(32px,5vw,52px);line-height:1.08;margin:13px 0}.hero p{max-width:650px;color:#e7f3ed;line-height:1.7}.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.chip{background:#ffffff20;padding:9px 14px;border-radius:99px;font-size:13px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:0 0 18px}.section-head h2{margin:5px 0 0;font-size:clamp(25px,4vw,32px)}.muted{color:var(--muted);font-size:14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.game-card{color:white;border:0;border-radius:22px;padding:25px;text-align:left;min-height:235px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 8px 22px #173b2d18;transition:.18s}.game-card:hover{transform:translateY(-4px);box-shadow:0 15px 28px #173b2d25}.top{display:flex;justify-content:space-between;width:100%;align-items:center}.game-icon{font-size:42px}.category{font-size:11px;font-weight:900;letter-spacing:.1em;background:#ffffff2a;padding:7px 11px;border-radius:99px}.mission{margin-top:22px;font-size:11px;letter-spacing:.15em;opacity:.75;font-weight:800}.game-card h3{margin:7px 0;font-size:25px}.game-card p{margin:0;line-height:1.55;font-size:14px;opacity:.9}.play-label{margin-top:17px;background:white;color:#172c23;border-radius:10px;padding:10px 15px;font-size:13px;font-weight:800}.emerald{background:linear-gradient(135deg,#16815e,#0d5143)}.orange{background:linear-gradient(135deg,#e7a52e,#b95716)}.blue{background:linear-gradient(135deg,#3976d8,#293f86)}.purple{background:linear-gradient(135deg,#8756d7,#4b318e)}
+.hidden{display:none!important}.back{border:0;background:transparent;color:#145c45;font-weight:800;padding:0;margin:0 0 18px}.scorebar,.team-panel,.game-panel{background:#fff;border-radius:18px;box-shadow:0 5px 20px #173b2d0b}.scorebar{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 21px;margin-bottom:15px}.scorebar h2{margin:4px 0 0;font-size:21px}.score{font-size:28px;font-weight:900;color:#b47b14;text-align:right}.small-label{font-size:11px;color:var(--muted);font-weight:900;letter-spacing:.11em}.team-panel{padding:14px 18px;margin-bottom:15px}.team-panel label{display:block;margin-bottom:7px;font-size:11px;color:var(--muted);font-weight:900;letter-spacing:.1em}.team-panel input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;outline:none;color:var(--ink)}.team-panel input:focus,select:focus{border-color:#16815e;outline:none}
+.game-panel{padding:clamp(21px,4vw,36px)}.game-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px}.pill{padding:8px 12px;background:#e5f3eb;color:#176044;border-radius:99px;font-size:11px;font-weight:900}.progress{height:7px;border-radius:99px;background:#edf1ed;overflow:hidden;margin:16px 0 23px}.progress>div{height:100%;background:#16815e;transition:width .2s}.game-panel h2{margin:0;font-size:clamp(22px,4vw,28px)}.instruction{color:var(--muted);line-height:1.6;margin:8px 0}.arabic{direction:rtl;text-align:center;background:#f3f7f2;border-radius:16px;margin:23px 0;padding:26px 14px;color:#164a35;font-family:"Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(31px,6vw,47px);line-height:1.9}.answer-title{font-weight:800;margin-bottom:11px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.option{background:#fff;border:2px solid var(--line);border-radius:11px;padding:13px;text-align:left;font-weight:700;color:var(--ink);transition:.15s}.option:hover:not(:disabled){border-color:#16815e;background:#f7fbf8}.option:disabled{cursor:default;opacity:1}.option.correct{border-color:#2c9b5c;background:#eaf8ef;color:#176137}.option.wrong{border-color:#d95353;background:#fff0f0;color:#9b2929}.letter{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:8px;border-radius:8px;background:#edf2ee;font-size:12px}.feedback{margin-top:19px;border-radius:13px;padding:15px;line-height:1.55}.feedback.good{background:#eaf8ef;color:#176137}.feedback.bad{background:#fff0f0;color:#9b2929}.feedback p{margin:7px 0 0;font-size:14px}.primary,.secondary{border:0;border-radius:10px;padding:12px 18px;font-weight:800;margin-top:14px}.primary{background:#145c45;color:#fff}.primary:hover{background:#0d4432}.secondary{background:#eef2ee;color:#33483c;margin-left:8px}.primary:disabled{opacity:.5;cursor:not-allowed}
+.toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:20px}.field label{display:block;font-size:11px;font-weight:900;color:var(--muted);letter-spacing:.08em;margin-bottom:7px}.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}.hint{background:#f3f7f2;border-radius:11px;padding:12px 14px;color:#486255;font-size:13px;line-height:1.55;margin:12px 0}.status{font-size:12px;color:var(--muted);margin:10px 0}.wordbank{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;direction:rtl}.word{border:2px solid #c8dfd0;border-radius:10px;padding:11px 13px;background:white;color:#164a35;font-family:serif;font-size:23px;font-weight:800}.word:hover{border-color:#16815e}.finish{text-align:center;padding:20px 5px}.trophy{font-size:65px}.finish h2{margin:12px 0;font-size:31px}.final-score{color:#b47b14;font-size:48px;font-weight:900;margin:20px 0}footer{text-align:center;background:var(--g);color:#d7eee2;padding:22px 15px;font-size:13px}
+@media(max-width:650px){.header-inner{min-height:70px}.arena{font-size:11px;padding:8px 10px}.grid,.options,.toolbar{grid-template-columns:1fr}.game-card{min-height:215px}.section-head{align-items:flex-start;flex-direction:column}.scorebar{align-items:flex-start}.score{font-size:24px}main{padding-top:24px}}
+
+.material-promo{margin-top:26px;padding:24px 26px;background:#fff;border:1px solid var(--line);border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 5px 20px #173b2d0b}
+.material-promo h2{margin:5px 0 7px}.material-promo p{margin:0;color:var(--muted);font-size:14px;line-height:1.6;max-width:650px}
+.material-hero{padding:30px;border-radius:22px;background:linear-gradient(115deg,#124b38,#23785a);color:white;margin-bottom:22px}
+.material-hero h1{font-size:clamp(28px,4vw,40px);margin:9px 0}.material-hero p{max-width:720px;color:#e7f3ed;line-height:1.7;margin-bottom:0}
+.material-tools{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-bottom:17px}
+.material-tools input,.material-tools select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink)}
+.material-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.material-card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 4px 16px #173b2d08}
+.material-card h3{margin:0 0 10px;font-size:19px}.material-card p{font-size:14px;line-height:1.65;color:#42594d;margin:8px 0}
+.material-card .arabic{font-size:25px;margin:13px 0;padding:13px}
+.material-tag{display:inline-block;background:#e7f3eb;color:#176044;padding:6px 9px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:.07em;margin-bottom:9px}
+.material-card ul{padding-left:20px;margin:8px 0;color:#42594d;font-size:14px;line-height:1.7}
+.material-card strong{color:#173b2d}.no-material{grid-column:1/-1;background:white;border-radius:14px;padding:22px;color:var(--muted)}
+@media(max-width:650px){.material-promo{align-items:flex-start;flex-direction:column}.material-tools,.material-list{grid-template-columns:1fr}.material-hero{padding:24px}}
+
+
+.learning-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.learning-stats span{background:#ffffff20;padding:8px 12px;border-radius:30px;font-size:12px;font-weight:700}
+.material-section-title h2{margin:5px 0;font-size:25px}.material-section-title p{margin:5px 0 16px;color:var(--muted);font-size:14px;line-height:1.6}
+.material-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.material-category{border:1px solid var(--line);border-radius:17px;background:#fff;padding:19px;text-align:left;color:var(--ink);box-shadow:0 4px 16px #173b2d08;transition:.15s}.material-category:hover{border-color:#8eb9a0;transform:translateY(-2px)}.material-category .cat-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.material-category .cat-icon{font-size:27px}.material-category h3{margin:12px 0 6px;font-size:18px}.material-category p{font-size:13px;line-height:1.55;color:var(--muted);margin:0}.material-category small{display:block;color:#176044;font-weight:800;margin-top:13px}
+.level-pill{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:#e8f3eb;color:#176044;border-radius:99px;padding:6px 9px}
+.reference-panel{margin-top:24px;padding:21px;background:#fff;border:1px solid var(--line);border-radius:17px}.reference-panel h3{margin:0 0 7px}.reference-panel p{font-size:13px;color:var(--muted);line-height:1.6}.reference-item{padding:11px 0;border-top:1px solid #edf1ed;font-size:13px;line-height:1.55}.reference-item a{color:#176044;font-weight:800;text-decoration:none}.reference-item a:hover{text-decoration:underline}
+.topic-header{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:15px}.topic-header h2{margin:8px 0}.topic-header p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}.topic-cards{display:grid;grid-template-columns:1fr 1fr;gap:13px}.topic-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;text-align:left;color:var(--ink)}.topic-card:hover{border-color:#8eb9a0}.topic-card h3{margin:9px 0 6px;font-size:17px}.topic-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.topic-card .open-topic{display:inline-block;margin-top:13px;color:#176044;font-size:12px;font-weight:900}
+.lesson-sheet{background:#fff;border:1px solid var(--line);border-radius:19px;padding:clamp(20px,4vw,34px)}.lesson-sheet h1{font-size:clamp(25px,4vw,34px);margin:9px 0}.lesson-sheet h2{font-size:19px;margin:22px 0 8px}.lesson-sheet p,.lesson-sheet li{font-size:14px;line-height:1.8;color:#40564a}.lesson-sheet ul{padding-left:21px}.lesson-arabic{direction:rtl;text-align:center;font-family:"Noto Naskh Arabic","Traditional Arabic",serif;font-size:32px;line-height:1.9;padding:18px;background:#f3f7f2;border-radius:14px;margin:16px 0;color:#164a35}.lesson-note{padding:14px 16px;background:#f5f8f5;border-left:4px solid #23785a;border-radius:9px;font-size:13px;line-height:1.65;color:#40564a;margin:17px 0}.lesson-check{padding:17px;background:#fff9e9;border:1px solid #f0dfb7;border-radius:13px;margin-top:22px}.lesson-check h3{margin:0 0 10px;font-size:16px}.lesson-check button{display:block;width:100%;margin:7px 0;text-align:left;padding:10px 12px;border:1px solid #e8dfc8;background:#fff;border-radius:9px;color:#33483c}.lesson-check button:hover{border-color:#c59b42}.lesson-check .quiz-feedback{font-size:13px;font-weight:700;margin-top:10px}.lesson-nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}.lesson-nav button{border:0;border-radius:10px;padding:11px 14px;font-weight:800;background:#145c45;color:#fff}.no-material{background:white;border-radius:14px;padding:22px;color:var(--muted)}
+@media(max-width:650px){.material-categories,.topic-cards{grid-template-columns:1fr}.learning-stats{gap:6px}.learning-stats span{font-size:11px}}
+
+
+.audio-example{margin:18px 0 22px;padding:17px 18px;border:1px solid #cfe2d5;border-radius:15px;background:#f3f8f4}
+.audio-heading{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.audio-icon{font-size:25px}
+.audio-heading strong{display:block;color:#174b38;font-size:16px}
+.audio-heading small{display:block;color:#61766b;margin-top:3px}
+.audio-example p{font-size:14px;line-height:1.6;margin:8px 0;color:#344d40}
+.audio-example audio{width:100%;height:42px;margin:5px 0}
+.audio-example .audio-focus{background:#fff;border-radius:9px;padding:10px 12px}
+.audio-example .audio-credit{display:block;color:#6a7b70;line-height:1.5}
+.audio-example a{color:#176044;text-decoration:underline}
+
+
+.continue-controls{display:grid;grid-template-columns:1.2fr 1fr 1.3fr;gap:12px;align-items:end}
+.continue-controls .field{min-width:0}
+.continue-controls select{max-width:100%}
+@media(max-width:700px){.continue-controls{grid-template-columns:1fr}}
+
+
+.quran-promo{background:linear-gradient(120deg,#f3f8f4,#fff);border-color:#cfe2d5}
+.quran-hero{padding:30px;border-radius:22px;background:linear-gradient(115deg,#124b38,#23785a);color:#fff;margin:0 0 20px}
+.quran-hero h1{font-size:clamp(28px,4vw,40px);margin:9px 0}.quran-hero p{max-width:760px;color:#e7f3ed;line-height:1.7;margin-bottom:0}
+.quran-toolbar{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:13px;align-items:end;padding:17px;background:#fff;border:1px solid var(--line);border-radius:15px;margin-bottom:14px}
+.quran-toolbar select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.tajweed-toggle{display:flex;align-items:center;gap:8px;padding:12px 4px;font-size:13px;font-weight:700;color:#345447;white-space:nowrap}
+.tajweed-toggle input{width:17px;height:17px;accent-color:#176044}
+.tajweed-guide{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.tajweed-guide-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px 16px 10px}
+.tajweed-guide-head strong{font-size:14px;color:#1b4432}.tajweed-guide-head p{font-size:11px;line-height:1.55;color:#66786d;margin:4px 0 0}
+.tajweed-guide-note{white-space:nowrap;background:#eaf4ed;color:#176044;padding:5px 8px;border-radius:99px;font-size:10px;font-weight:800}
+.tajweed-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid #edf1ed}
+.tajweed-legend-item{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-bottom:1px solid #edf1ed}
+.tajweed-legend-item:nth-child(3n+2),.tajweed-legend-item:nth-child(3n+3){border-left:1px solid #edf1ed}
+.tajweed-legend-item strong{display:block;font-size:11px;color:#344d40}
+.tajweed-legend-item small{display:block;font-size:10px;line-height:1.4;color:#738278;margin-top:2px}
+.legend-dot{flex:0 0 10px;width:10px;height:10px;border-radius:3px;margin-top:3px}
+.legend-dot.hamwasl{background:#64748b}.legend-dot.lam{background:#a16207}
+.legend-dot.madnormal{background:#2563eb}.legend-dot.madperm{background:#0e7490}
+.legend-dot.madoblig{background:#1d4ed8}.legend-dot.madnecessary{background:#6d28d9}
+.legend-dot.ikhfa{background:#d97706}.legend-dot.ikhfashafawi{background:#ea580c}
+.legend-dot.idghamgh{background:#15803d}.legend-dot.idghamno{background:#0f766e}
+.legend-dot.idghamsh{background:#16a34a}.legend-dot.iqlab{background:#dc2626}
+.legend-dot.ghunnah{background:#be123c}.legend-dot.qalqalah{background:#9333ea}
+.legend-dot.silent{background:#94a3b8}.legend-dot.other{background:#475569}
+.quran-source-note{font-size:11px;line-height:1.6;color:#65756b;margin:8px 2px 15px}
+.quran-verses{display:flex;flex-direction:column;gap:12px}
+.quran-verse-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 4px 14px #173b2d07}
+.quran-verse-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.quran-verse-key{font-size:11px;font-weight:800;color:#176044;background:#eaf4ed;border-radius:99px;padding:6px 10px}
+.quran-arabic{font-family:"Amiri","Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(26px,4vw,34px);line-height:2.15;text-align:right;direction:rtl;color:#172f25;word-spacing:4px}
+.quran-translation{border-top:1px solid #edf1ed;margin-top:12px;padding-top:12px;font-size:14px;line-height:1.85;color:#40564a}
+.quran-translation-label{font-size:10px;letter-spacing:.08em;font-weight:900;color:#789084;margin-bottom:4px}
+.quran-arabic .ayah-end{font-size:.65em;color:#718277;white-space:nowrap}
+.tajweed-rule{font-weight:800;border-radius:3px;padding:0 1px;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;cursor:help}
+.tajweed-rule:hover,.tajweed-rule:focus{background:#fff3c4;outline:1px solid #d6a63c}
+.tajweed-ham_wasl{color:#64748b;text-decoration-color:#64748b}
+.tajweed-laam_shamsiyah{color:#a16207;text-decoration-color:#a16207}
+.tajweed-madda_normal{color:#2563eb;text-decoration-color:#2563eb}
+.tajweed-madda_permissible{color:#0e7490;text-decoration-color:#0e7490}
+.tajweed-madda_obligatory{color:#1d4ed8;text-decoration-color:#1d4ed8}
+.tajweed-madda_necessary{color:#6d28d9;text-decoration-color:#6d28d9}
+.tajweed-qalqalah{color:#9333ea;text-decoration-color:#9333ea}
+.tajweed-ikhfa{color:#d97706;text-decoration-color:#d97706}
+.tajweed-ikhfa_shafawi{color:#ea580c;text-decoration-color:#ea580c}
+.tajweed-idgham_ghunnah{color:#15803d;text-decoration-color:#15803d}
+.tajweed-idgham_wo_ghunnah{color:#0f766e;text-decoration-color:#0f766e}
+.tajweed-idgham_shafawi{color:#16a34a;text-decoration-color:#16a34a}
+.tajweed-iqlab{color:#dc2626;text-decoration-color:#dc2626}
+.tajweed-ghunnah{color:#be123c;text-decoration-color:#be123c}
+.tajweed-silent{color:#94a3b8;text-decoration-color:#94a3b8}
+.tajweed-other{color:#475569;text-decoration-color:#475569}
+.quran-bottom-nav{display:flex;justify-content:space-between;gap:10px;margin:18px 0}
+@media(max-width:900px){.tajweed-legend{grid-template-columns:repeat(2,minmax(0,1fr))}.tajweed-legend-item:nth-child(3n+2),.tajweed-legend-item:nth-child(3n+3){border-left:0}.tajweed-legend-item:nth-child(even){border-left:1px solid #edf1ed}}
+@media(max-width:560px){.tajweed-legend{grid-template-columns:1fr}.tajweed-legend-item:nth-child(even){border-left:0}}
+@media(max-width:760px){.quran-toolbar{grid-template-columns:1fr}.tajweed-toggle{padding:2px 0}.quran-verse-card{padding:15px}.quran-bottom-nav button{font-size:11px;padding:10px}}
+
+</style>
 </head>
 <body>
 <header><div class="header-inner"><div><div class="brand">QUR'AN <span>QUEST</span></div><div class="tagline">Tahsin &amp; Tahfidz Learning Adventure</div></div><div class="arena">🏆 Learning Arena</div></div></header>
@@ -24,6 +137,11 @@
     <p>Pelajari konsep, huruf, cara membaca, dan contoh dasar hukum tajwid sebelum mengerjakan tantangan permainan.</p></div>
     <button class="primary" onclick="openMaterials()">📚 Buka Materi Tajwid →</button>
   </div>
+  <div class="material-promo quran-promo">
+    <div><div class="eyebrow" style="color:#176044">Qur'an Reader</div><h2>Baca Al-Qur'an</h2>
+    <p>Buka surah, baca teks Arab per ayat, lihat terjemahan bahasa Indonesia, dan aktifkan penanda warna tajwid.</p></div>
+    <button class="primary" onclick="openQuran()">📖 Buka Al-Qur'an →</button>
+  </div>
 </section>
 <section id="materials" class="hidden">
   <button class="back" onclick="backHome()">← Kembali ke Game Center</button>
@@ -37,6 +155,23 @@
   <div id="materialTopics" class="hidden"><button class="back" onclick="showMaterialCatalog()">← Semua bidang tajwid</button><div id="topicHeader" class="topic-header"></div><div id="topicCards" class="topic-cards"></div></div>
   <div id="materialLesson" class="hidden"><button class="back" onclick="backToTopics()">← Kembali ke daftar submateri</button><div id="lessonContent"></div></div>
   <div class="hint">Catatan penting: pembelajaran tajwid tidak cukup dengan membaca teori. Makhraj, sifat huruf, kadar dengung, dan panjang harakat harus dilatih melalui contoh audio, talaqqi, serta koreksi langsung dari guru yang kompeten.</div>
+</section>
+<section id="quranReader" class="hidden">
+  <button class="back" onclick="backHome()">← Kembali ke Game Center</button>
+  <div class="quran-hero"><div class="eyebrow">Qur'an Reader · Mushaf Digital</div><h1>Baca Al-Qur'an</h1><p>Pilih surah untuk membaca ayat lengkap dengan terjemahan bahasa Indonesia. Aktifkan tampilan tajwid untuk melihat penanda hukum bacaan berwarna.</p></div>
+  <div class="quran-toolbar">
+    <div class="field"><label for="quranSurahSelect">PILIH SURAH</label><select id="quranSurahSelect"></select></div>
+    <button class="primary" id="loadQuranButton">Buka Surah</button>
+    <label class="tajweed-toggle"><input type="checkbox" id="tajweedToggle" checked> Tampilkan warna tajwid</label>
+  </div>
+  <div class="tajweed-guide">
+    <div class="tajweed-guide-head"><div><strong>Panduan Warna Tajwid</strong><p>Setiap warna menandai jenis kaidah yang disematkan pada teks digital. Arahkan kursor atau ketuk bagian berwarna untuk melihat nama kaidah.</p></div><span class="tajweed-guide-note">Riwayat Hafs</span></div>
+    <div class="tajweed-legend" id="tajweedLegend"></div>
+  </div>
+  <div class="quran-source-note">Terjemahan: Kementerian Agama RI (resource terjemahan ID 33 pada Quran.com API). Penanda tajwid berasal dari tag kelas pada teks Uthmani Tajweed Quran.com. Nama dan keterangan warna mengikuti label data sumber; sebagian label mad bersifat umum dan perlu dibaca bersama konteks ayat serta kaidah riwayat Hafs. Warna membantu identifikasi awal, bukan pengganti talaqqi.</div>
+  <div id="quranStatus" class="status">Pilih surah, kemudian tekan “Buka Surah”.</div>
+  <div id="quranVerses" class="quran-verses"></div>
+  <div class="quran-bottom-nav"><button class="secondary" id="prevSurahButton">← Surah sebelumnya</button><button class="secondary" id="nextSurahButton">Surah berikutnya →</button></div>
 </section>
 <section id="play" class="hidden">
   <button class="back" onclick="backHome()">← Kembali ke Game Center</button>
@@ -88,6 +223,123 @@ function q(question,arabic,options,answer,explanation){return {question,arabic,o
 const categories = Object.keys(tajwidBank);
 const juzOptions = Array.from({length:30},(_,i)=>i+1);
 const surahNames = ["Al-Fatihah", "Al-Baqarah", "Ali 'Imran", "An-Nisa", "Al-Ma'idah", "Al-An'am", "Al-A'raf", "Al-Anfal", "At-Taubah", "Yunus", "Hud", "Yusuf", "Ar-Ra'd", "Ibrahim", "Al-Hijr", "An-Nahl", "Al-Isra", "Al-Kahf", "Maryam", "Taha", "Al-Anbiya", "Al-Hajj", "Al-Mu'minun", "An-Nur", "Al-Furqan", "Asy-Syu'ara", "An-Naml", "Al-Qasas", "Al-'Ankabut", "Ar-Rum", "Luqman", "As-Sajdah", "Al-Ahzab", "Saba", "Fatir", "Yasin", "As-Saffat", "Sad", "Az-Zumar", "Ghafir", "Fussilat", "Asy-Syura", "Az-Zukhruf", "Ad-Dukhan", "Al-Jasiyah", "Al-Ahqaf", "Muhammad", "Al-Fath", "Al-Hujurat", "Qaf", "Az-Zariyat", "At-Tur", "An-Najm", "Al-Qamar", "Ar-Rahman", "Al-Waqi'ah", "Al-Hadid", "Al-Mujadilah", "Al-Hasyr", "Al-Mumtahanah", "As-Saff", "Al-Jumu'ah", "Al-Munafiqun", "At-Tagabun", "At-Talaq", "At-Tahrim", "Al-Mulk", "Al-Qalam", "Al-Haqqah", "Al-Ma'arij", "Nuh", "Al-Jinn", "Al-Muzzammil", "Al-Muddassir", "Al-Qiyamah", "Al-Insan", "Al-Mursalat", "An-Naba", "An-Nazi'at", "'Abasa", "At-Takwir", "Al-Infitar", "Al-Mutaffifin", "Al-Insyiqaq", "Al-Buruj", "At-Tariq", "Al-A'la", "Al-Ghasyiyah", "Al-Fajr", "Al-Balad", "Asy-Syams", "Al-Lail", "Ad-Duha", "Asy-Syarh", "At-Tin", "Al-'Alaq", "Al-Qadr", "Al-Bayyinah", "Az-Zalzalah", "Al-'Adiyat", "Al-Qari'ah", "At-Takasur", "Al-'Asr", "Al-Humazah", "Al-Fil", "Quraisy", "Al-Ma'un", "Al-Kausar", "Al-Kafirun", "An-Nasr", "Al-Lahab", "Al-Ikhlas", "Al-Falaq", "An-Nas"];
+
+let quranCache = new Map();
+let activeQuranSurah = 1;
+const QURAN_API_BASE = "https://api.quran.com/api/v4";
+const QURAN_TRANSLATION_ID = 33; // Terjemahan Bahasa Indonesia Kemenag RI
+
+function openQuran(){
+ renderTajweedLegend();
+ document.getElementById("home").classList.add("hidden");
+ document.getElementById("play").classList.add("hidden");
+ document.getElementById("materials").classList.add("hidden");
+ document.getElementById("quranReader").classList.remove("hidden");
+ const select=document.getElementById("quranSurahSelect");
+ if(!select.options.length){
+  select.innerHTML=surahNames.map((name,i)=>`<option value="${i+1}">${String(i+1).padStart(3,"0")} · ${name}</option>`).join("");
+  select.value=String(activeQuranSurah);
+  select.addEventListener("change",()=>{activeQuranSurah=Number(select.value);});
+ }
+ window.scrollTo({top:0,behavior:"smooth"});
+ loadQuranSurah(activeQuranSurah);
+}
+const TAJWEED_RULE_INFO = {
+ ham_wasl:{label:"Hamzatul Wasl",detail:"Hamzah sambung: dibaca ketika memulai, gugur ketika disambung.",dot:"hamwasl"},
+ laam_shamsiyah:{label:"Lam Syamsiyah",detail:"Lam ta‘rif tidak dilafalkan jelas dan masuk ke huruf syamsiyah.",dot:"lam"},
+ madda_normal:{label:"Mad Thabi‘i / Mad Asli",detail:"Mad dasar; umumnya dua harakat dalam riwayat Hafs.",dot:"madnormal"},
+ madda_permissible:{label:"Mad dengan pemanjangan jaiz",detail:"Penanda mad yang dibolehkan dipanjangkan; rincian kadar mengikuti konteks dan jalur bacaan.",dot:"madperm"},
+ madda_obligatory:{label:"Mad Wajib Muttasil",detail:"Mad bertemu hamzah dalam satu kata; dalam Hafs umumnya 4–5 harakat.",dot:"madoblig"},
+ madda_necessary:{label:"Mad Lazim",detail:"Mad bertemu sukun asli; dibaca enam harakat dalam kaidah Hafs.",dot:"madnecessary"},
+ ikhfa:{label:"Ikhfa Haqiqi",detail:"Nun sukun atau tanwin dibaca samar disertai ghunnah.",dot:"ikhfa"},
+ ikhfa_shafawi:{label:"Ikhfa Syafawi",detail:"Mim sukun bertemu ba; dibaca samar dengan ghunnah.",dot:"ikhfashafawi"},
+ idgham_ghunnah:{label:"Idgham Bighunnah",detail:"Peleburan nun sukun/tanwin dengan ghunnah.",dot:"idghamgh"},
+ idgham_wo_ghunnah:{label:"Idgham Bilaghunnah",detail:"Peleburan nun sukun/tanwin tanpa ghunnah.",dot:"idghamno"},
+ idgham_shafawi:{label:"Idgham Mimi / Mitslain Shaghir",detail:"Mim sukun bertemu mim; dilebur dengan ghunnah.",dot:"idghamsh"},
+ iqlab:{label:"Iqlab",detail:"Nun sukun atau tanwin berubah menjadi bunyi mim samar ketika bertemu ba.",dot:"iqlab"},
+ ghunnah:{label:"Ghunnah",detail:"Dengung melalui rongga hidung; umumnya dua harakat pada nun/mim bertasydid.",dot:"ghunnah"},
+ qalqalah:{label:"Qalqalah",detail:"Pantulan suara pada huruf ق ط ب ج د ketika sukun.",dot:"qalqalah"},
+ silent:{label:"Huruf tidak dibaca / tanda diam",detail:"Penanda huruf atau bagian yang tidak dilafalkan pada posisi tersebut.",dot:"silent"}
+};
+function tajweedRuleLabel(ruleClass){
+ const info=TAJWEED_RULE_INFO[ruleClass];
+ return info?`${info.label}. ${info.detail}`:`Penanda tajwid: ${ruleClass.replace(/_/g," ")}. Lihat kaidah terkait pada materi tajwid.`;
+}
+function renderTajweedLegend(){
+ const root=document.getElementById("tajweedLegend");if(!root)return;
+ root.innerHTML=Object.entries(TAJWEED_RULE_INFO).map(([key,info])=>
+  `<div class="tajweed-legend-item"><i class="legend-dot ${info.dot}"></i><div><strong>${escapeHTML(info.label)}</strong><small>${escapeHTML(info.detail)}</small></div></div>`
+ ).join("")+`<div class="tajweed-legend-item"><i class="legend-dot other"></i><div><strong>Penanda lain / belum dipetakan</strong><small>Jika ditemukan, kelas dari sumber tetap ditampilkan dengan nama teknisnya.</small></div></div>`;
+}
+function cleanTajweedMarkup(value){
+ if(!value)return "";
+ let safe=String(value).replace(/<tajweed\s+class=(?:"([^"]+)"|'([^']+)'|([a-z0-9_]+))\s*>/gi,(_,a,b,c)=>{
+  const ruleClass=(a||b||c||"").toLowerCase();
+  if(!/^[a-z0-9_]+$/.test(ruleClass))return "";
+  const label=escapeHTML(tajweedRuleLabel(ruleClass));
+  return `<span class="tajweed-rule tajweed-${ruleClass}" title="${label}" aria-label="${label}">`;
+ });
+ safe=safe.replace(/<\/tajweed>/gi,"</span>");
+ safe=safe.replace(/<span\s+class=(?:"end"|'end'|end)\s*>/gi,'<span class="ayah-end">');
+ /* Whitelist only the exact span forms generated above; discard any other tags/attributes. */
+ safe=safe.replace(/<(?!\/?span(?: class="tajweed-rule tajweed-[a-z0-9_]+" title="[^"]*" aria-label="[^"]*"| class="ayah-end")?>)[^>]*>/gi,"");
+ return safe;
+}
+function stripHtmlText(value){
+ const div=document.createElement("div");
+ div.innerHTML=String(value||"");
+ return (div.textContent||div.innerText||"").trim();
+}
+async function fetchQuranChapter(chapter){
+ if(quranCache.has(chapter))return quranCache.get(chapter);
+ const perPage=50;let page=1,all=[];
+ while(true){
+  const url=`${QURAN_API_BASE}/verses/by_chapter/${chapter}?language=id&words=false&per_page=${perPage}&page=${page}&fields=text_uthmani,text_uthmani_tajweed&translations=${QURAN_TRANSLATION_ID}`;
+  const response=await fetch(url);
+  if(!response.ok)throw new Error(`Sumber Al-Qur’an tidak merespons (HTTP ${response.status}).`);
+  const data=await response.json();
+  const verses=(data.verses||[]).map(v=>({
+   key:v.verse_key,arabic:v.text_uthmani||"",tajweed:v.text_uthmani_tajweed||"",
+   translation:stripHtmlText(v.translations?.[0]?.text||"")
+  })).filter(v=>v.key&&(v.arabic||v.tajweed));
+  all=all.concat(verses);
+  const pg=data.pagination||{};
+  if(pg.total_pages!==undefined&&pg.total_pages!==null){if(page>=Number(pg.total_pages))break;}
+  else if((data.verses||[]).length<perPage)break;
+  if(!(data.verses||[]).length)break;
+  page++;
+  if(page>10)throw new Error("Pengambilan data surah melebihi batas halaman yang diharapkan.");
+ }
+ if(!all.length)throw new Error("Data surah tidak ditemukan.");
+ quranCache.set(chapter,all);return all;
+}
+async function loadQuranSurah(chapter){
+ activeQuranSurah=Number(chapter);
+ const status=document.getElementById("quranStatus"),root=document.getElementById("quranVerses");
+ const select=document.getElementById("quranSurahSelect");if(select)select.value=String(activeQuranSurah);
+ status.textContent=`Memuat Surah ${surahNames[activeQuranSurah-1]}…`;root.innerHTML="";
+ try{
+  const verses=await fetchQuranChapter(activeQuranSurah);
+  status.textContent=`Surah ${surahNames[activeQuranSurah-1]} · ${verses.length} ayat`;
+  renderQuranVerses(verses);
+ }catch(err){
+  status.textContent="Gagal memuat surah. Periksa koneksi internet, lalu coba lagi.";
+  root.innerHTML=`<div class="hint">${escapeHTML(err.message)}<br>Reader Al-Qur’an membutuhkan koneksi internet.</div><button class="primary" onclick="loadQuranSurah(activeQuranSurah)">Coba lagi</button>`;
+ }
+}
+function renderQuranVerses(verses){
+ const root=document.getElementById("quranVerses");
+ const tajweedOn=document.getElementById("tajweedToggle").checked;
+ root.innerHTML=verses.map(v=>{
+  const arabic=tajweedOn&&v.tajweed?cleanTajweedMarkup(v.tajweed):escapeHTML(v.arabic);
+  return `<article class="quran-verse-card" id="verse-${v.key.replace(":","-")}"><div class="quran-verse-head"><span class="quran-verse-key">${v.key}</span><span class="small-label">AL-QUR’AN</span></div><div class="quran-arabic" dir="rtl">${arabic}</div><div class="quran-translation"><div class="quran-translation-label">TERJEMAHAN BAHASA INDONESIA · KEMENAG RI</div>${escapeHTML(v.translation||"Terjemahan belum tersedia dari sumber.")}</div></article>`;
+ }).join("");
+}
+function navigateQuranSurah(delta){
+ const next=Math.min(114,Math.max(1,activeQuranSurah+delta));
+ if(next!==activeQuranSurah)loadQuranSurah(next);
+}
+
 
 const juzCache = new Map();
 let currentGame=null, category="Nun sukun & tanwin", questionIndex=0, score=0, answered=false, finished=false, activeQuestions=[];
@@ -246,7 +498,7 @@ function startGame(id){
   const titles={detective:"Tajwid Detective",battle:"Tajwid Battle",puzzle:"Ayat Puzzle",continue:"Continue the Ayah"};
   document.getElementById("gameTitle").textContent=titles[id];updateScore();renderGame();window.scrollTo({top:0,behavior:"smooth"});
 }
-function backHome(){document.getElementById("play").classList.add("hidden");document.getElementById("materials").classList.add("hidden");document.getElementById("home").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function backHome(){document.getElementById("play").classList.add("hidden");document.getElementById("materials").classList.add("hidden");document.getElementById("quranReader").classList.add("hidden");document.getElementById("home").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
 function updateScore(){document.getElementById("score").textContent=score;}
 function juzSelectHTML(){return `<div class="field"><label for="juzSelect">PILIH JUZ (1–30)</label><select id="juzSelect">${juzOptions.map(n=>`<option value="${n}" ${n===juz?"selected":""}>Juz ${n}</option>`).join("")}</select></div>`;}
 function categorySelectHTML(){return `<div class="field"><label for="categorySelect">PILIH CABANG HUKUM TAJWID</label><select id="categorySelect">${categories.map(c=>`<option ${c===category?"selected":""}>${c}</option>`).join("")}</select></div>`;}
@@ -457,6 +709,14 @@ function renderFinish(root){
 function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 
 document.addEventListener('DOMContentLoaded',()=>{const search=document.getElementById('materialSearch'),level=document.getElementById('materialLevel');if(search)search.addEventListener('input',renderMaterialCategories);if(level)level.addEventListener('change',renderMaterialCategories);});
+
+document.getElementById("tajweedToggle")?.addEventListener("change",()=>{
+ if(quranCache.has(activeQuranSurah))renderQuranVerses(quranCache.get(activeQuranSurah));
+});
+document.getElementById("loadQuranButton")?.addEventListener("click",()=>loadQuranSurah(Number(document.getElementById("quranSurahSelect").value)));
+document.getElementById("prevSurahButton")?.addEventListener("click",()=>navigateQuranSurah(-1));
+document.getElementById("nextSurahButton")?.addEventListener("click",()=>navigateQuranSurah(1));
+
 </script>
 </body>
 </html>
