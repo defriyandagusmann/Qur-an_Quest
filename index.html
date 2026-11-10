@@ -118,6 +118,22 @@ main{padding:36px 0 55px}.hero{padding:clamp(28px,5vw,52px);color:white;border-r
 @media(max-width:560px){.tajweed-legend{grid-template-columns:1fr}.tajweed-legend-item:nth-child(even){border-left:0}}
 @media(max-width:760px){.quran-toolbar{grid-template-columns:1fr}.tajweed-toggle{padding:2px 0}.quran-verse-card{padding:15px}.quran-bottom-nav button{font-size:11px;padding:10px}}
 
+
+.quran-search-panel{background:#fff;border:1px solid #dfe9e2;border-radius:16px;padding:18px;margin:18px 0 22px;box-shadow:0 5px 18px rgba(20,60,40,.045)}
+.quran-search-field{width:100%;margin:0}
+.quran-search-field input{width:100%;box-sizing:border-box;border:1px solid #cfded3;border-radius:10px;padding:13px 14px;font:inherit;background:#fbfdfb;color:#183b2b}
+.quran-search-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
+.quran-search-help{font-size:12px;color:#718277;margin-top:9px;line-height:1.5}
+.quran-search-status{font-size:13px;color:#35634a;margin-top:10px}
+.quran-search-results{display:grid;gap:9px;margin-top:10px}
+.quran-search-result{border:1px solid #e3ebe5;border-radius:12px;padding:12px 14px;background:#fbfdfb}
+.quran-search-result-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px}
+.quran-search-result-ref{font-size:12px;font-weight:800;color:#176044}
+.quran-search-result-arabic{font-family:serif;font-size:23px;line-height:1.9;text-align:right;color:#173d2b;margin:4px 0}
+.quran-search-result-translation{font-size:13px;line-height:1.7;color:#52665a}
+.quran-search-result button{margin-top:8px;padding:7px 11px;font-size:12px}
+@media(max-width:600px){.quran-search-panel{padding:13px}.quran-search-result-arabic{font-size:20px}}
+
 </style>
 </head>
 <body>
@@ -163,6 +179,19 @@ main{padding:36px 0 55px}.hero{padding:clamp(28px,5vw,52px);color:white;border-r
     <div class="field"><label for="quranSurahSelect">PILIH SURAH</label><select id="quranSurahSelect"></select></div>
     <button class="primary" id="loadQuranButton">Buka Surah</button>
     <label class="tajweed-toggle"><input type="checkbox" id="tajweedToggle" checked> Tampilkan warna tajwid</label>
+  </div>
+  <div class="quran-search-panel">
+    <div class="field quran-search-field">
+      <label for="quranSearchInput">CARI AYAT AL-QUR’AN</label>
+      <input id="quranSearchInput" type="search" placeholder="Ketik kata/frasa terjemahan, teks Arab, atau nomor surah:ayat…" autocomplete="off">
+    </div>
+    <div class="quran-search-actions">
+      <button class="primary" id="quranSearchButton">Cari Ayat</button>
+      <button class="secondary" id="quranSearchClearButton" type="button">Hapus</button>
+    </div>
+    <div class="quran-search-help">Pencarian mencakup teks ayat dan terjemahan. Contoh: “sabar”, “rahmat”, atau “2:255”.</div>
+    <div id="quranSearchStatus" class="quran-search-status" aria-live="polite"></div>
+    <div id="quranSearchResults" class="quran-search-results"></div>
   </div>
   <div class="tajweed-guide">
     <div class="tajweed-guide-head"><div><strong>Panduan Warna Tajwid</strong><p>Setiap warna menandai jenis kaidah yang disematkan pada teks digital. Arahkan kursor atau ketuk bagian berwarna untuk melihat nama kaidah.</p></div><span class="tajweed-guide-note">Riwayat Hafs</span></div>
@@ -335,6 +364,75 @@ function renderQuranVerses(verses){
   return `<article class="quran-verse-card" id="verse-${v.key.replace(":","-")}"><div class="quran-verse-head"><span class="quran-verse-key">${v.key}</span><span class="small-label">AL-QUR’AN</span></div><div class="quran-arabic" dir="rtl">${arabic}</div><div class="quran-translation"><div class="quran-translation-label">TERJEMAHAN BAHASA INDONESIA · KEMENAG RI</div>${escapeHTML(v.translation||"Terjemahan belum tersedia dari sumber.")}</div></article>`;
  }).join("");
 }
+
+function normalizeQuranSearchText(value){
+ return String(value||"").toLocaleLowerCase("id").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ًٌٍَُِّْٰـ]/g,"").replace(/\s+/g," ").trim();
+}
+function clearQuranSearch(){
+ const input=document.getElementById("quranSearchInput");
+ const status=document.getElementById("quranSearchStatus");
+ const results=document.getElementById("quranSearchResults");
+ if(input)input.value="";
+ if(status)status.textContent="";
+ if(results)results.innerHTML="";
+}
+function renderQuranSearchResults(items,total){
+ const root=document.getElementById("quranSearchResults");
+ if(!items.length){root.innerHTML="";return;}
+ root.innerHTML=items.map((item,index)=>{
+  const ref=String(item.verse_key||"");
+  const arabic=item.text||item.text_uthmani||"";
+  const translation=stripHtmlText(item.translations?.[0]?.text||item.translation||"");
+  return `<article class="quran-search-result">
+   <div class="quran-search-result-head"><span class="quran-search-result-ref">${escapeHTML("QS "+ref)}</span><span class="small-label">HASIL ${index+1}</span></div>
+   ${arabic?`<div class="quran-search-result-arabic" dir="rtl">${escapeHTML(arabic)}</div>`:""}
+   <div class="quran-search-result-translation">${escapeHTML(translation||"Pratinjau terjemahan tidak tersedia.")}</div>
+   <button class="secondary" type="button" onclick="openQuranSearchResult('${escapeHTML(ref)}')">Buka dalam mushaf</button>
+  </article>`;
+ }).join("");
+}
+async function searchQuranVerses(){
+ const input=document.getElementById("quranSearchInput");
+ const status=document.getElementById("quranSearchStatus");
+ const results=document.getElementById("quranSearchResults");
+ const query=(input?.value||"").trim();
+ if(!query){status.textContent="Masukkan kata, frasa, atau nomor surah:ayat yang ingin dicari.";results.innerHTML="";return;}
+ status.textContent="Sedang mencari ayat…";results.innerHTML="";
+ try{
+  // Dukungan langsung untuk referensi surah:ayat, misalnya 2:255 atau 2:255-257.
+  const refMatch=query.match(/^(\d{1,3})\s*:\s*(\d{1,3})(?:\s*-\s*(\d{1,3}))?$/);
+  if(refMatch){
+   const chapter=Number(refMatch[1]),from=Number(refMatch[2]),to=Number(refMatch[3]||refMatch[2]);
+   if(chapter<1||chapter>114||from<1||to<from)throw new Error("Format referensi tidak valid. Gunakan contoh 2:255.");
+   const verses=await fetchQuranChapter(chapter);
+   const found=verses.filter(v=>{const n=Number(v.key.split(":")[1]);return n>=from&&n<=to;});
+   status.textContent=found.length?`${found.length} ayat ditemukan pada Surah ${surahNames[chapter-1]}.`:"Nomor ayat tidak ditemukan pada surah tersebut.";
+   renderQuranSearchResults(found.map(v=>({verse_key:v.key,text:v.arabic,translations:[{text:v.translation}]})),found.length);
+   return;
+  }
+  const url=`${QURAN_API_BASE}/search?q=${encodeURIComponent(query)}&size=30&page=1`;
+  const response=await fetch(url);
+  if(!response.ok)throw new Error(`Layanan pencarian tidak merespons (HTTP ${response.status}).`);
+  const data=await response.json();
+  const searchData=data.search||data;
+  const items=searchData.results||data.results||[];
+  const total=Number(searchData.total_results??items.length);
+  status.textContent=items.length?`${items.length} hasil ditampilkan${Number.isFinite(total)&&total>items.length?` dari ${total} hasil`:''}.`:"Tidak ditemukan ayat yang sesuai. Coba kata kunci lain.";
+  renderQuranSearchResults(items,total);
+ }catch(err){
+  status.textContent=`Pencarian gagal: ${err.message}`;
+ }
+}
+async function openQuranSearchResult(ref){
+ const match=String(ref||"").match(/^(\d+):(\d+)$/);
+ if(!match)return;
+ const chapter=Number(match[1]),verse=Number(match[2]);
+ await loadQuranSurah(chapter);
+ const target=document.getElementById(`verse-${chapter}-${verse}`);
+ if(target)target.scrollIntoView({behavior:"smooth",block:"center"});
+ else document.getElementById("quranStatus").textContent+=` · Ayat ${verse} tidak ditemukan pada tampilan.`;
+}
+
 function navigateQuranSurah(delta){
  const next=Math.min(114,Math.max(1,activeQuranSurah+delta));
  if(next!==activeQuranSurah)loadQuranSurah(next);
@@ -714,6 +812,9 @@ document.getElementById("tajweedToggle")?.addEventListener("change",()=>{
  if(quranCache.has(activeQuranSurah))renderQuranVerses(quranCache.get(activeQuranSurah));
 });
 document.getElementById("loadQuranButton")?.addEventListener("click",()=>loadQuranSurah(Number(document.getElementById("quranSurahSelect").value)));
+document.getElementById("quranSearchButton")?.addEventListener("click",searchQuranVerses);
+document.getElementById("quranSearchClearButton")?.addEventListener("click",clearQuranSearch);
+document.getElementById("quranSearchInput")?.addEventListener("keydown",e=>{if(e.key==="Enter")searchQuranVerses();});
 document.getElementById("prevSurahButton")?.addEventListener("click",()=>navigateQuranSurah(-1));
 document.getElementById("nextSurahButton")?.addEventListener("click",()=>navigateQuranSurah(1));
 
